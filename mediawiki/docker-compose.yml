@@ -9,6 +9,18 @@ services:
       - db
     volumes:
       - ./mediawiki/shared:/opt/mediawiki_shared:rw
+    depends_on:
+      - db
+    environment:
+      DOMAIN: ${DOMAIN}
+      WIKI_NAME: ${WIKI_NAME}
+      WIKI_ADMIN_USER: ${WIKI_ADMIN_USER}
+      WIKI_ADMIN_PASSWORD: ${WIKI_ADMIN_PASSWORD}
+      WIKI_LANG: ${WIKI_LANG:-en}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-mediawiki}
+      MYSQL_USER: ${MYSQL_USER:-mediawiki}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-mediawiki}
+    command: sh -c '/root/wait-for db:3306 -- /root/start.sh'
 
   db:
     image: mariadb:10
