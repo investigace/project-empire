@@ -1,0 +1,19 @@
+version: '3.6'
+
+services:
+  mediawiki:
+    restart: always
+    ports:
+      - 80:80
+
+  db:
+    restart: always
+    ports:
+      - 3306:3306
+
+  # TODO:
+  # nginx:
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   restart: always

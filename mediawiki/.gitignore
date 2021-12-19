@@ -1,0 +1,8 @@
+.env
+
+mariadb/data/*
+!mariadb/data/.gitkeep
+
+mediawiki/shared/LocalSettings.php
+mediawiki/shared/images/*
+!mediawiki/shared/images/.gitkeep

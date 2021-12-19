@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mediawiki:
+    build:
+      context: ./mediawiki
+      dockerfile: ./Dockerfile
+    links:
+      - db
+    volumes:
+      - ./mediawiki/shared:/opt/mediawiki_shared
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+  db:
+    image: mariadb:10
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+  # TODO:
+  # nginx:
+  #   image: nginx:1.21
+  #   volumes:
+  #     - ./nginx/conf:/etc/nginx/conf.d:ro
+  #     - ./certbot/www:/var/www/certbot:ro
+  #     - ./certbot/letsencrypt:/etc/letsencrypt:ro
+
+  # certbot:
+  #   image: certbot/certbot:v1.22.0
+  #   volumes:
+  #     - ./certbot/www:/var/www/certbot:rw
+  #     - ./certbot/letsencrypt:/etc/letsencrypt:rw
