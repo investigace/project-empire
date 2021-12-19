@@ -8,7 +8,7 @@ services:
     links:
       - db
     volumes:
-      - ./mediawiki/shared:/opt/mediawiki_shared
+      - ./mediawiki/shared:/opt/mediawiki_shared:rw
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
@@ -17,23 +17,9 @@ services:
   db:
     image: mariadb:10
     volumes:
-      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/data:/var/lib/mysql:rw
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-
-  # TODO:
-  # nginx:
-  #   image: nginx:1.21
-  #   volumes:
-  #     - ./nginx/conf:/etc/nginx/conf.d:ro
-  #     - ./certbot/www:/var/www/certbot:ro
-  #     - ./certbot/letsencrypt:/etc/letsencrypt:ro
-
-  # certbot:
-  #   image: certbot/certbot:v1.22.0
-  #   volumes:
-  #     - ./certbot/www:/var/www/certbot:rw
-  #     - ./certbot/letsencrypt:/etc/letsencrypt:rw
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-mediawiki}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-mediawiki}
+      MYSQL_USER: ${MYSQL_USER:-mediawiki}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-mediawiki}

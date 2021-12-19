@@ -2,18 +2,39 @@ version: '3.6'
 
 services:
   mediawiki:
-    restart: always
-    ports:
-      - 80:80
+    restart: unless-stopped
 
   db:
-    restart: always
-    ports:
-      - 3306:3306
+    restart: unless-stopped
 
-  # TODO:
-  # nginx:
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   restart: always
+  certbot:
+    build:
+      context: ./certbot
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./certbot/www:/var/www/certbot:rw
+      - ./certbot/letsencrypt:/etc/letsencrypt:rw
+    environment:
+      - DOMAIN=${DOMAIN}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - mediawiki
+    volumes:
+      - ./nginx/default.conf:/tmp/default.conf
+      - ./certbot/www:/var/www/certbot:ro
+      - ./certbot/letsencrypt:/etc/letsencrypt:ro
+    environment:
+      - DOMAIN=${DOMAIN}
+    depends_on:
+      - certbot
+    command: /app/start.sh

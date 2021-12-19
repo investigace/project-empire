@@ -6,3 +6,9 @@ mariadb/data/*
 mediawiki/shared/LocalSettings.php
 mediawiki/shared/images/*
 !mediawiki/shared/images/.gitkeep
+
+certbot/www/*
+!certbot/www/.gitkeep
+
+certbot/letsencrypt/*
+!certbot/letsencrypt/.gitkeep

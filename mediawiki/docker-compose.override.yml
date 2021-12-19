@@ -8,9 +8,3 @@ services:
   db:
     ports:
       - 3001:3306
-
-  # TODO:
-  # nginx:
-  #   ports:
-  #     - 8080:80
-  #     - 8443:443
