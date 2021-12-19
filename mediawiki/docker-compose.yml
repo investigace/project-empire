@@ -9,10 +9,6 @@ services:
       - db
     volumes:
       - ./mediawiki/shared:/opt/mediawiki_shared:rw
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
   db:
     image: mariadb:10
