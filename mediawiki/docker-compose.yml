@@ -12,15 +12,17 @@ services:
     depends_on:
       - db
     environment:
-      DOMAIN: ${DOMAIN}
-      WIKI_NAME: ${WIKI_NAME}
-      WIKI_ADMIN_USER: ${WIKI_ADMIN_USER}
-      WIKI_ADMIN_PASSWORD: ${WIKI_ADMIN_PASSWORD}
+      DOMAIN: ${DOMAIN:?DOMAIN must be set in .env file, eg. DOMAIN=example.org}
+      SCHEME: ${SCHEME:-https}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?ADMIN_EMAIL must be set in .env file, eg. ADMIN_EMAIL=admin@example.org}
+      WIKI_NAME: ${WIKI_NAME:?WIKI_NAME must be set in .env file, eg. WIKI_NAME=Empire Wiki}
+      WIKI_ADMIN_USER: ${WIKI_ADMIN_USER:?WIKI_ADMIN_USER must be set in .env file, eg. WIKI_ADMIN_USER=Admin}
+      WIKI_ADMIN_PASSWORD: ${WIKI_ADMIN_PASSWORD:?WIKI_ADMIN_PASSWORD must be set in .env file, eg. WIKI_ADMIN_PASSWORD=admin}
       WIKI_LANG: ${WIKI_LANG:-en}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-mediawiki}
       MYSQL_USER: ${MYSQL_USER:-mediawiki}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-mediawiki}
-    command: sh -c '/root/wait-for db:3306 -- /root/start.sh'
+    command: sh -c '/root/wait-for -t 60 db:3306 -- /root/start.sh'
 
   db:
     image: mariadb:10
