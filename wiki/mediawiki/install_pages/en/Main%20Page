@@ -1,0 +1,12 @@
+Congratulations, you have successfully installed Project Empire wiki!
+
+This is a default Main Page content you should tailor for your needs.
+
+== Overview of data in the database ==
+
+Following table is included via MediaWiki template "Empire summary table". The
+template gets updated everytime you push data to the wiki using Project Empire
+scripts, so the table will always reflect all the data you last pushed to this
+wiki.
+
+{{Empire summary table}}

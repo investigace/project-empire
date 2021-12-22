@@ -15,10 +15,10 @@ services:
       DOMAIN: ${DOMAIN:?DOMAIN must be set in .env file, eg. DOMAIN=example.org}
       SCHEME: ${SCHEME:-https}
       ADMIN_EMAIL: ${ADMIN_EMAIL:?ADMIN_EMAIL must be set in .env file, eg. ADMIN_EMAIL=admin@example.org}
-      WIKI_NAME: ${WIKI_NAME:?WIKI_NAME must be set in .env file, eg. WIKI_NAME=Empire Wiki}
-      WIKI_ADMIN_USER: ${WIKI_ADMIN_USER:?WIKI_ADMIN_USER must be set in .env file, eg. WIKI_ADMIN_USER=Admin}
-      WIKI_ADMIN_PASSWORD: ${WIKI_ADMIN_PASSWORD:?WIKI_ADMIN_PASSWORD must be set in .env file, eg. WIKI_ADMIN_PASSWORD=admin}
-      WIKI_LANG: ${WIKI_LANG:-en}
+      INSTALL_WIKI_NAME: ${INSTALL_WIKI_NAME:?INSTALL_WIKI_NAME must be set in .env file, eg. INSTALL_WIKI_NAME=Empire Wiki}
+      INSTALL_WIKI_ADMIN_USER: ${INSTALL_WIKI_ADMIN_USER:?INSTALL_WIKI_ADMIN_USER must be set in .env file, eg. INSTALL_WIKI_ADMIN_USER=Admin}
+      INSTALL_WIKI_ADMIN_PASSWORD: ${INSTALL_WIKI_ADMIN_PASSWORD:?INSTALL_WIKI_ADMIN_PASSWORD must be set in .env file, eg. INSTALL_WIKI_ADMIN_PASSWORD=admin}
+      INSTALL_WIKI_LANG: ${INSTALL_WIKI_LANG:-en}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-mediawiki}
       MYSQL_USER: ${MYSQL_USER:-mediawiki}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-mediawiki}

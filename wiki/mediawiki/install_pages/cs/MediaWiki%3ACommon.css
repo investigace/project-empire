@@ -1,0 +1,33 @@
+.infobox {
+  border: 1px solid #aaa;
+  background-color: #e9f2da;
+  color: black;
+  margin-bottom: 0.5em;
+  margin-left: 1em;
+  padding: 0.2em;
+  float: right;
+  clear: right;
+}
+.infobox .heading{
+background-color: #D4BDA6;padding:2px;text-align:center;
+}
+.infobox.bordered td,
+.infobox.bordered th {
+  border: 1px solid #aaa;
+}
+
+/* styles for bordered infobox with merged rows */
+.infobox.bordered .mergedtoprow td,
+.infobox.bordered .mergedtoprow th {
+  border-top: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+}
+
+.gallerybox .thumb img {
+ background: #F9F9F9;
+}
+
+.infobox.bordered .mergedrow td,
+.infobox.bordered .mergedrow th {
+  border-right: 1px solid #aaa;
+}
