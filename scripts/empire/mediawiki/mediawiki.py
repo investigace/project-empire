@@ -14,8 +14,13 @@ class MediaWiki:
     def __init__(self, wiki_url, wiki_username, wiki_password):
         url_parsed = urlparse(wiki_url)
 
-        self.site = mwclient.Site(url_parsed.netloc, path='/', scheme=url_parsed.scheme)
+        self.site = mwclient.Site(
+            url_parsed.netloc, path='/', scheme=url_parsed.scheme)
         self.site.login(wiki_username, wiki_password)
+
+        # Detect MediaWiki language
+        siteinfo = self.site.raw_api(action='query', meta='siteinfo')
+        self.lang = siteinfo['query']['general']['lang']
 
     def prepare_changes(self, empire_data):
         changes = {
@@ -31,9 +36,12 @@ class MediaWiki:
             }
         }
 
-        changes = self._merge_changes(changes, prepare_legal_entities_changes(self.site, empire_data))
-        changes = self._merge_changes(changes, prepare_people_changes(self.site, empire_data))
-        changes = self._merge_changes(changes, prepare_summary_changes(self.site, empire_data))
+        changes = self._merge_changes(
+            changes, prepare_legal_entities_changes(self, empire_data))
+        changes = self._merge_changes(
+            changes, prepare_people_changes(self, empire_data))
+        changes = self._merge_changes(
+            changes, prepare_summary_changes(self, empire_data))
 
         return changes
 
@@ -47,7 +55,8 @@ class MediaWiki:
             if 'delete' in changes['pages']:
                 total += len(changes['pages']['delete'])
 
-        progress_bar = enlighten.Counter(total=total, desc='Pushing changes to Empire MediaWiki', unit='ticks')
+        progress_bar = enlighten.Counter(
+            total=total, desc='Pushing changes to Empire MediaWiki', unit='ticks')
 
         if 'pages' in changes and 'create' in changes['pages']:
             for create_change in changes['pages']['create']:

@@ -1,11 +1,11 @@
 from pprint import pprint
-from os.path import join, dirname
 
 import iso3166
-from mako.template import Template
+
+from .page_templates import render_page_template
 
 
-def prepare_summary_changes(site, empire_data):
+def prepare_summary_changes(mediawiki, empire_data):
     changes = {
         'pages': {
             'create': [],
@@ -14,8 +14,8 @@ def prepare_summary_changes(site, empire_data):
         }
     }
 
-    page = prepare_summary_table_template_page(empire_data)
-    mediawiki_page = site.pages[page['name']]
+    page = prepare_summary_table_page(empire_data, mediawiki.lang)
+    mediawiki_page = mediawiki.site.pages[page['name']]
 
     if mediawiki_page.exists:
         mediawiki_page_content = mediawiki_page.text()
@@ -35,9 +35,7 @@ def prepare_summary_changes(site, empire_data):
     return changes
 
 
-def prepare_summary_table_template_page(empire_data):
-    template = Template(filename=join(dirname(__file__), 'page_templates', 'summary_table_template.mako'))
-
+def prepare_summary_table_page(empire_data, lang):
     countries_dict = {}
 
     if 'legal_entities' in empire_data:
@@ -78,7 +76,4 @@ def prepare_summary_table_template_page(empire_data):
         totals['legal_entities_count'] += country['legal_entities_count']
         totals['people_count'] += country['people_count']
 
-    return {
-        'name': 'Template:Empire summary table',
-        'content': template.render(countries=countries, totals=totals).strip()
-    }
+    return render_page_template(lang, 'summary_table_template.mako', {'countries': countries, 'totals': totals})

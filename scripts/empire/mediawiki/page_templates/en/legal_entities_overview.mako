@@ -1,3 +1,5 @@
+= Legal entities overview =
+
 % for group in legal_entities_by_country:
 == ${group['country_name']} ==
 

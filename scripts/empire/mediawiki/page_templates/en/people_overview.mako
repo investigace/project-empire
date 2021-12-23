@@ -1,3 +1,5 @@
+= People overview =
+
 % for group in people_by_country:
 == ${group['country_name']} ==
 

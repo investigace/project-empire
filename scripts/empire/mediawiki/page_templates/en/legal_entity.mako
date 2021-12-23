@@ -1,10 +1,12 @@
+= ${legal_entity.database_identifier} =
+
 {| class="infobox vcard" style="width: 300px; font-size: 95%; text-align: left; border-collapse: collapse;background-color:#e9f2da;" cellpadding="6"
 |-
 | '''Legal entity type:'''
 | ${legal_entity.legal_entity_type if legal_entity.legal_entity_type else ''}
 |-
 | '''Identification number:'''
-| ${int(legal_entity.identification_number) if legal_entity.identification_number else ''}
+| ${legal_entity.identification_number if legal_entity.identification_number else ''}
 |-
 | '''Address:'''
 | ${legal_entity.address if legal_entity.address else ''}

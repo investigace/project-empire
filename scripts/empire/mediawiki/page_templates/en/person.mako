@@ -1,3 +1,5 @@
+= ${person.database_identifier} =
+
 {| class="infobox vcard" style="width: 300px; font-size: 95%; text-align: left; border-collapse: collapse;background-color:#e9f2da;" cellpadding="6"
 |-
 | '''Nationality:'''

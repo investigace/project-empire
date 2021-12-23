@@ -1,3 +1,5 @@
+= Template:Empire summary table =
+
 {| class="wikitable"
 |-
 ! style="text-align:left;" | Country
