@@ -71,7 +71,6 @@ def prepare_legal_entities_changes(mediawiki, empire_data):
     # Legal entities overview
 
     page = prepare_legal_entities_overview_page(empire_data, mediawiki.lang)
-    pprint(page)
     page_name = page['name']
     page_content = page['content']
 

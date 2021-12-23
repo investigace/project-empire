@@ -10,8 +10,8 @@
 % for country in countries:
 |-
 | style="text-align:left;" | ${country['name']}
-| style="text-align:right;" | ${("[[Přehled právnických osob / Legal entities overview#" + country['name'] + " | " + str(country['legal_entities_count'])) if country['legal_entities_count'] > 0 else '0'}
-| style="text-align:right;" | ${("[[Přehled fyzických osob / People overview#" + country['name'] + " | " + str(country['people_count'])) if country['people_count'] > 0 else '0'}
+| style="text-align:right;" | ${("[[Přehled právnických osob / Legal entities overview#" + country['name'] + " | " + str(country['legal_entities_count']) + "]]") if country['legal_entities_count'] > 0 else '0'}
+| style="text-align:right;" | ${("[[Přehled fyzických osob / People overview#" + country['name'] + " | " + str(country['people_count']) + "]]") if country['people_count'] > 0 else '0'}
 | style="text-align:right;" | TODO
 | style="text-align:right;" | TODO
 % endfor

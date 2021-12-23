@@ -54,7 +54,6 @@ def prepare_people_changes(mediawiki, empire_data):
     # People overview
 
     page = prepare_people_overview_page(empire_data, mediawiki.lang)
-    pprint(page)
 
     mediawiki_page = mediawiki.site.pages[page['name']]
 
