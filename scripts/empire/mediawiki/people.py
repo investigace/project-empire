@@ -2,6 +2,7 @@ from pprint import pprint
 
 from iso3166 import countries
 
+from .countries import get_countries_in_other_group
 from .page_templates import render_page_template
 
 
@@ -53,6 +54,7 @@ def prepare_people_changes(mediawiki, empire_data):
     # People overview
 
     page = prepare_people_overview_page(empire_data, mediawiki.lang)
+    pprint(page)
 
     mediawiki_page = mediawiki.site.pages[page['name']]
 
@@ -87,16 +89,29 @@ def prepare_people_overview_page(empire_data, lang):
 
         people_by_country_dict[person.nationality].append(person)
 
+    countries_in_other_group = get_countries_in_other_group(empire_data)
+
     people_by_country = []
+    other_countries_item = {
+        'country_name': 'Other countries',
+        'people': []
+    }
+
     for country_code, people in people_by_country_dict.items():
-        people_by_country.append({
-            'country_code': country_code,
-            'country_name': countries.get(country_code).name,
-            'people': people
-        })
+        if country_code in countries_in_other_group:
+            other_countries_item['people'] += people
+        else:
+            people_by_country.append({
+                'country_code': country_code,
+                'country_name': countries.get(country_code).name,
+                'people': people
+            })
 
     people_by_country = sorted(
         people_by_country, key=lambda group: group['country_name'])
+
+    if len(other_countries_item['people']) > 0:
+        people_by_country.append(other_countries_item)
 
     return render_page_template(lang, 'people_overview.mako', {'people_by_country': people_by_country})
 

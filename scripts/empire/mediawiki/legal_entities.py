@@ -2,6 +2,7 @@ from pprint import pprint
 
 from iso3166 import countries
 
+from .countries import get_countries_in_other_group
 from .page_templates import render_page_template
 
 
@@ -70,6 +71,7 @@ def prepare_legal_entities_changes(mediawiki, empire_data):
     # Legal entities overview
 
     page = prepare_legal_entities_overview_page(empire_data, mediawiki.lang)
+    pprint(page)
     page_name = page['name']
     page_content = page['content']
 
@@ -107,16 +109,29 @@ def prepare_legal_entities_overview_page(empire_data, lang):
         legal_entities_by_country_dict[legal_entity.country].append(
             legal_entity)
 
+    countries_in_other_group = get_countries_in_other_group(empire_data)
+
     legal_entities_by_country = []
+    other_countries_item = {
+        'country_name': 'Other countries',
+        'legal_entities': []
+    }
+
     for country_code, legal_entities in legal_entities_by_country_dict.items():
-        legal_entities_by_country.append({
-            'country_code': country_code,
-            'country_name': countries.get(country_code).name,
-            'legal_entities': legal_entities
-        })
+        if country_code in countries_in_other_group:
+            other_countries_item['legal_entities'] += legal_entities
+        else:
+            legal_entities_by_country.append({
+                'country_code': country_code,
+                'country_name': countries.get(country_code).name,
+                'legal_entities': legal_entities
+            })
 
     legal_entities_by_country = sorted(
         legal_entities_by_country, key=lambda group: group['country_name'])
+
+    if len(other_countries_item['legal_entities']) > 0:
+        legal_entities_by_country.append(other_countries_item)
 
     return render_page_template(lang, 'legal_entities_overview.mako', {'legal_entities_by_country': legal_entities_by_country})
 

@@ -2,6 +2,7 @@ from pprint import pprint
 
 import iso3166
 
+from .countries import get_countries_in_other_group
 from .page_templates import render_page_template
 
 
@@ -58,15 +59,30 @@ def prepare_summary_table_page(empire_data, lang):
 
             countries_dict[person.nationality]['people_count'] += 1
 
+    countries_in_other_group = get_countries_in_other_group(empire_data)
+
     countries = []
+    other_countries_item = {
+        'name': 'Other countries',
+        'legal_entities_count': 0,
+        'people_count': 0
+    }
+
     for country_code, country_data in countries_dict.items():
-        countries.append({
-            'code': country_code,
-            'name': iso3166.countries.get(country_code).name,
-            **country_data
-        })
+        if country_code in countries_in_other_group:
+            other_countries_item['legal_entities_count'] += country_data['legal_entities_count']
+            other_countries_item['people_count'] += country_data['people_count']
+        else:
+            countries.append({
+                'code': country_code,
+                'name': iso3166.countries.get(country_code).name,
+                **country_data
+            })
 
     countries = sorted(countries, key=lambda country: country['name'])
+
+    if other_countries_item['legal_entities_count'] > 0 or other_countries_item['people_count'] > 0:
+        countries.append(other_countries_item)
 
     totals = {
         'legal_entities_count': 0,
