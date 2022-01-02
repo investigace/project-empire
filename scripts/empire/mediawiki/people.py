@@ -20,7 +20,7 @@ def prepare_people_changes(mediawiki, empire_data):
     keep_page_names = []
 
     for person in empire_data.get('people', []):
-        page = prepare_person_page(person, mediawiki.lang)
+        page = prepare_person_page(person, empire_data, mediawiki.lang)
         page_name = page['name']
         page_content = page['content']
 
@@ -75,8 +75,15 @@ def prepare_people_changes(mediawiki, empire_data):
     return changes
 
 
-def prepare_person_page(person, lang):
-    return render_page_template(lang, 'person.mako', {'person': person})
+def prepare_person_page(person, empire_data, lang):
+    owning = list(o for o in empire_data['owners'] if o.owner_legal_entity_or_person == person)
+
+    owning = sorted(owning, key=lambda o: o.owned_legal_entity.name)
+
+    return render_page_template(lang, 'person.mako', {
+        'person': person,
+        'owning': owning
+    })
 
 
 def prepare_people_overview_page(empire_data, lang):

@@ -29,4 +29,4 @@ touch $MEDIAWIKI_IMAGES/.gitkeep
 rm -rf $MARIADB_DATA/*
 touch $MARIADB_DATA/.gitkeep
 
-echo "Nuke done"
+echo "Nuking done"

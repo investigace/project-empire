@@ -1,3 +1,4 @@
+import locale
 from pprint import pprint
 
 from iso3166 import countries
@@ -15,29 +16,12 @@ def prepare_legal_entities_changes(mediawiki, empire_data):
         }
     }
 
-    # wanted_categories = [
-    #     'Legal entities'
-    # ]
-
-    # if 'legal_entities' in empire_data:
-    #     types = map(lambda legal_entity: legal_entity.legal_entity_type, empire_data['legal_entities'])
-    #     types = list(set(types)) # unique
-    #     types = filter(lambda type: type is not None, types)
-
-    #     for type in types:
-    #         wanted_categories.append(f'Legal entity type {type}')
-
-    # existing_categories = list(map(lambda cat: cat.name[9:], list(mediawiki.site.allcategories())))
-
-    # pprint(existing_categories)
-    # pprint(wanted_categories)
-
     # Legal entities pages
 
     keep_page_names = []
 
     for legal_entity in empire_data.get('legal_entities', []):
-        page = prepare_legal_entity_page(legal_entity, mediawiki.lang)
+        page = prepare_legal_entity_page(legal_entity, empire_data, mediawiki.lang)
         page_name = page['name']
         page_content = page['content']
 
@@ -94,8 +78,62 @@ def prepare_legal_entities_changes(mediawiki, empire_data):
     return changes
 
 
-def prepare_legal_entity_page(legal_entity, lang):
-    return render_page_template(lang, 'legal_entity.mako', {'legal_entity': legal_entity})
+def prepare_legal_entity_page(legal_entity, empire_data, lang):
+    def map_owner(owner):
+        info_line_items = [owner.owner_name, owner.owner_type]
+        if owner.owner_country:
+            info_line_items.append(owner.owner_country)
+        if owner.owner_address:
+            info_line_items.append(owner.owner_address)
+        if owner.owner_legal_entity_identification_number:
+            info_line_items.append(owner.owner_legal_entity_identification_number)
+        if owner.owner_person_date_of_birth:
+            info_line_items.append(str(owner.owner_person_date_of_birth))
+
+        return {
+            **vars(owner),
+            'info_line': ', '.join(info_line_items)
+        }
+
+    def map_other_relationship(other_relationship):
+        info_line_items = [other_relationship.related_name, other_relationship.related_type]
+        if other_relationship.related_country:
+            info_line_items.append(other_relationship.related_country)
+        if other_relationship.related_address:
+            info_line_items.append(other_relationship.related_address)
+        if other_relationship.related_legal_entity_identification_number:
+            info_line_items.append(other_relationship.related_legal_entity_identification_number)
+        if other_relationship.related_person_date_of_birth:
+            info_line_items.append(str(other_relationship.related_person_date_of_birth))
+
+        return {
+            **vars(other_relationship),
+            'info_line': ', '.join(info_line_items)
+        }
+
+    owners = list(map(map_owner, (o for o in empire_data['owners'] if o.owned_legal_entity == legal_entity)))
+    owning = list(o for o in empire_data['owners'] if o.owner_legal_entity_or_person == legal_entity)
+    other_relationships = list(map(map_other_relationship, (r for r in empire_data['other_relationships'] if r.legal_entity == legal_entity)))
+    previous_names = list(pn for pn in empire_data['legal_entities_previous_names'] if pn.legal_entity == legal_entity)
+    previous_addresses = list(pn for pn in empire_data['legal_entities_previous_addresses'] if pn.legal_entity == legal_entity)
+    media_mentions = list(m for m in empire_data['legal_entities_media_mentions'] if m.legal_entity == legal_entity)
+
+    empty_date_first = lambda date: str(date) if date is not None else '9999'
+    owners = sorted(owners, key=lambda o: (empty_date_first(o['owned_until_date']), empty_date_first(o['owned_since_date'])), reverse=True)
+    owning = sorted(owning, key=lambda o: locale.strxfrm(o.owned_legal_entity.name))
+    other_relationships = sorted(other_relationships, key=lambda r: locale.strxfrm(r['related_name']))
+    previous_names = sorted(previous_names, key=lambda pn: (empty_date_first(pn.named_until_date), empty_date_first(pn.named_since_date)), reverse=True)
+    previous_addresses = sorted(previous_addresses, key=lambda pa: (empty_date_first(pa.address_until_date), empty_date_first(pa.address_since_date)), reverse=True)
+
+    return render_page_template(lang, 'legal_entity.mako', {
+        'legal_entity': legal_entity,
+        'owners': owners,
+        'owning': owning,
+        'other_relationships': other_relationships,
+        'previous_names': previous_names,
+        'previous_addresses': previous_addresses,
+        'media_mentions': media_mentions
+    })
 
 
 def prepare_legal_entities_overview_page(empire_data, lang):

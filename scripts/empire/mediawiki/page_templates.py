@@ -7,6 +7,8 @@ from mako.template import Template
 def render_page_template(lang, file, render_data):
     template = Template(filename=join(dirname(__file__), 'page_templates', lang, file))
 
+    render_data['to_s'] = lambda v: v if v is not None else ''
+
     rendered = template.render(**render_data).strip()
     rendered_lines = rendered.splitlines()
 
