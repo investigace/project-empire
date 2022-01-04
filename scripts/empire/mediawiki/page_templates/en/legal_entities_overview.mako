@@ -5,10 +5,20 @@
 
 {| class="wikitable sortable"
 |-
-!  !! Legal entity type !! Country !! Identification number !! Owners !! Subsidies found !! Subsidies sum
+!
+! Legal entity type
+! Country
+! Identification number
+! Subsidies found
+! Subsidies sum
 % for legal_entity in group['legal_entities']:
 |-
-| [[${legal_entity.database_identifier}]] || ${legal_entity.legal_entity_type} || ${legal_entity.country} || ${legal_entity.identification_number} || TODO || TODO || TODO
+| [[${legal_entity.database_identifier}]]
+| ${legal_entity.legal_entity_type if legal_entity.legal_entity_type else ''}
+| ${legal_entity.country}
+| ${legal_entity.identification_number if legal_entity.identification_number else ''}
+| TODO
+| TODO
 % endfor
 |}
 % endfor
