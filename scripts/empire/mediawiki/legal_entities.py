@@ -117,6 +117,7 @@ def prepare_legal_entity_page(legal_entity, empire_data, lang):
     previous_names = list(pn for pn in empire_data['legal_entities_previous_names'] if pn.legal_entity == legal_entity)
     previous_addresses = list(pn for pn in empire_data['legal_entities_previous_addresses'] if pn.legal_entity == legal_entity)
     media_mentions = list(m for m in empire_data['legal_entities_media_mentions'] if m.legal_entity == legal_entity)
+    sources = list(s for s in empire_data['legal_entities_sources'] if s.legal_entity == legal_entity)
 
     empty_date_first = lambda date: str(date) if date is not None else '9999'
     owners = sorted(owners, key=lambda o: (empty_date_first(o['owned_until_date']), empty_date_first(o['owned_since_date'])), reverse=True)
@@ -132,7 +133,8 @@ def prepare_legal_entity_page(legal_entity, empire_data, lang):
         'other_relationships': other_relationships,
         'previous_names': previous_names,
         'previous_addresses': previous_addresses,
-        'media_mentions': media_mentions
+        'media_mentions': media_mentions,
+        'sources': sources
     })
 
 

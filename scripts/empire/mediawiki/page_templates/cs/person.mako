@@ -6,7 +6,7 @@
 | ${person.nationality if person.nationality else ''}
 |-
 | '''Rok narození / Year of birth:'''
-| TODO
+| ${to_s(year_of_birth)}
 |-
 | '''Země pobytu / Residence country:'''
 | ${person.residence_country if person.residence_country else ''}
@@ -41,7 +41,25 @@
 
 == Další vztahy / Other relationships ==
 
-TODO
+% if len(other_relationships) > 0:
+{| class="wikitable sortable"
+|-
+! style="text-align:left;" | Právnická nebo fyzická osoba ve vztahu / Related legal entity or person
+! style="text-align:left;" | Od / Since date
+! style="text-align:left;" | Do / Until date
+! style="text-align:left;" | Poznámky / Details
+% for other_relationship in other_relationships:
+|-
+| style="text-align:left;" | [[${other_relationship.legal_entity.database_identifier}]]
+| style="text-align:left;" | ${to_s(other_relationship.related_since_date)}
+| style="text-align:left;" | ${to_s(other_relationship.related_until_date)}
+| style="text-align:left;" | ${to_s(other_relationship.relationship_details)}
+% endfor
+|}
+% endif
+% if len(other_relationships) == 0:
+''Nemá další vztahy / No other relationships''
+% endif
 
 == Další poznámky / Other notes ==
 
@@ -49,6 +67,13 @@ ${person.other_notes if person.other_notes else "''Žádné další poznámky / 
 
 == Zdroje / Sources ==
 
-TODO
+% if len(sources) > 0:
+% for source in sources:
+* ${"''" + source.summary + "'' " if source.summary is not None else ''}${source.url + ' ' if source.url is not None else ''}${'(Naposledy kontrolováno / Last checked: ' + source.last_checked_date.strftime('%Y-%m-%d') + ')' if source.last_checked_date is not None else ''}
+% endfor
+% endif
+% if len(sources) == 0:
+''Bez zdrojů / No sources''
+% endif
 
 [[Kategorie:Fyzické osoby / People]]

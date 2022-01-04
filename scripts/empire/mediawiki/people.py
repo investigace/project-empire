@@ -77,12 +77,18 @@ def prepare_people_changes(mediawiki, empire_data):
 
 def prepare_person_page(person, empire_data, lang):
     owning = list(o for o in empire_data['owners'] if o.owner_legal_entity_or_person == person)
+    other_relationships = list(r for r in empire_data['other_relationships'] if r.related_legal_entity_or_person == person)
+    sources = list(s for s in empire_data['people_sources'] if s.person == person)
 
     owning = sorted(owning, key=lambda o: o.owned_legal_entity.name)
+    other_relationships = sorted(other_relationships, key=lambda o: o.legal_entity.name)
 
     return render_page_template(lang, 'person.mako', {
         'person': person,
-        'owning': owning
+        'owning': owning,
+        'other_relationships': other_relationships,
+        'year_of_birth': person.date_of_birth.strftime('%Y') if person.date_of_birth is not None else None,
+        'sources': sources
     })
 
 

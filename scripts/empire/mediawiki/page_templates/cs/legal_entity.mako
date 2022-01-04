@@ -159,7 +159,14 @@ ${legal_entity.other_notes if legal_entity.other_notes else "''Žádné další 
 
 == Zdroje / Sources ==
 
-TODO
+% if len(sources) > 0:
+% for source in sources:
+* ${"''" + source.summary + "'' " if source.summary is not None else ''}${source.url + ' ' if source.url is not None else ''}${'(Naposledy kontrolováno / Last checked: ' + source.last_checked_date.strftime('%Y-%m-%d') + ')' if source.last_checked_date is not None else ''}
+% endfor
+% endif
+% if len(sources) == 0:
+''Bez zdrojů / No sources''
+% endif
 
 [[Kategorie:Právnické osoby / Legal entities]]
 % if legal_entity.legal_entity_type is not None:

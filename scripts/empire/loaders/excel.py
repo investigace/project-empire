@@ -525,12 +525,17 @@ def parse_date(date_str):
     datetime_obj = None
 
     try:
-        datetime_obj = datetime.strptime(date_str, '%Y-%m-%d')
+        datetime_obj = datetime.strptime(str(date_str), '%Y-%m-%d')
     except ValueError:
         pass
 
     try:
-        datetime_obj = datetime.strptime(date_str, '%d.%m.%Y')
+        datetime_obj = datetime.strptime(str(date_str), '%d.%m.%Y')
+    except ValueError:
+        pass
+
+    try:
+        datetime_obj = datetime.strptime(str(date_str), '%Y')
     except ValueError:
         pass
 
