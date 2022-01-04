@@ -86,7 +86,7 @@ def prepare_legal_entity_page(legal_entity, empire_data, lang):
         if owner.owner_address:
             info_line_items.append(owner.owner_address)
         if owner.owner_legal_entity_identification_number:
-            info_line_items.append(owner.owner_legal_entity_identification_number)
+            info_line_items.append(str(owner.owner_legal_entity_identification_number))
         if owner.owner_person_date_of_birth:
             info_line_items.append(str(owner.owner_person_date_of_birth))
 
@@ -102,7 +102,7 @@ def prepare_legal_entity_page(legal_entity, empire_data, lang):
         if other_relationship.related_address:
             info_line_items.append(other_relationship.related_address)
         if other_relationship.related_legal_entity_identification_number:
-            info_line_items.append(other_relationship.related_legal_entity_identification_number)
+            info_line_items.append(str(other_relationship.related_legal_entity_identification_number))
         if other_relationship.related_person_date_of_birth:
             info_line_items.append(str(other_relationship.related_person_date_of_birth))
 
