@@ -8,8 +8,8 @@ Currently running Project Empire wikis:
 
 | Person of interest | Project Empire wiki              |
 | ------------------ | -------------------------------- |
-| Andrej Babiš       | https://empirekretinsky.vlki.cz/ |
-| Daniel Křetínský   | https://noveimperiumab.vlki.cz/  |
+| Andrej Babiš       | https://empirekretinsky.vlki.cz/ (UPDATE WITH FINAL DOMAIN) |
+| Daniel Křetínský   | https://noveimperiumab.vlki.cz/ (UPDATE WITH FINAL DOMAIN)  |
 
 If you have any questions related to this project, please contact (FILL EMAIL)
 
