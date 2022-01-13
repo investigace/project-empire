@@ -15,11 +15,11 @@ If you have any questions related to this project, please contact (FILL EMAIL)
 
 ## Table of contents
 
-- [How Project Empire works?](#how-project-empire-works-)
+- [How Project Empire works?](#how-project-empire-works)
   * [Database](#database)
   * [Wiki](#wiki)
   * [Scripts](#scripts)
-- [How to use Project Empire?](#how-to-use-project-empire-)
+- [How to use Project Empire?](#how-to-use-project-empire)
   * [1. Start your database](#1-start-your-database)
   * [2. Install wiki](#2-install-wiki)
   * [3. Push data from database to the wiki](#3-push-data-from-database-to-the-wiki)
