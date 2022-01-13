@@ -48,9 +48,9 @@ The script is a Python command line script, so you have to be at least slightly 
 
 And that's it. That's the whole Project Empire. If you want to install it and play with it yourself, you can find the documentation for it below.
 
-## Installation
+## How to use Project Empire?
 
-TODO
+(TODO)
 
 ## License
 
