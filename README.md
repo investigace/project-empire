@@ -13,6 +13,19 @@ Currently running Project Empire wikis:
 
 If you have any questions related to this project, please contact (FILL EMAIL)
 
+## Table of contents
+
+- [How Project Empire works?](#how-project-empire-works-)
+  * [Database](#database)
+  * [Wiki](#wiki)
+  * [Scripts](#scripts)
+- [How to use Project Empire?](#how-to-use-project-empire-)
+  * [1. Start your database](#1-start-your-database)
+  * [2. Install wiki](#2-install-wiki)
+  * [3. Push data from database to the wiki](#3-push-data-from-database-to-the-wiki)
+  * [4. Learn to use other scripts](#4-learn-to-use-other-scripts)
+- [License](#license)
+
 ## How Project Empire works?
 
 There are 3 main parts to a working Project Empire. **Database**, which is a Google spreadsheet containing all the data about business structures of selected person of interest. **Wiki**, which makes it possible to publicly browse through the database. And **scripts**, which most importantly offer a way to push data from the database to wiki.
@@ -49,6 +62,20 @@ The script is a Python command line script, so you have to be at least slightly 
 And that's it. That's the whole Project Empire. If you want to install it and play with it yourself, you can find the documentation for it below.
 
 ## How to use Project Empire?
+
+### 1. Start your database
+
+(TODO)
+
+### 2. Install wiki
+
+(TODO)
+
+### 3. Push data from database to the wiki
+
+(TODO)
+
+### 4. Learn to use other scripts
 
 (TODO)
 
