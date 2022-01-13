@@ -14,6 +14,8 @@ def load_excel(excel_path):
 
     legal_entities = load_legal_entities(wb)
     people = load_people(wb)
+    subsidies = [] # TODO
+
     owners = load_owners(wb, legal_entities, people)
     other_relationships = load_other_relationships(wb, legal_entities, people)
     legal_entities_previous_names = load_legal_entities_previous_names(wb, legal_entities)
@@ -25,6 +27,8 @@ def load_excel(excel_path):
     return {
         'legal_entities': legal_entities,
         'people': people,
+        'subsidies': subsidies,
+
         'owners': owners,
         'other_relationships': other_relationships,
         'legal_entities_previous_names': legal_entities_previous_names,
