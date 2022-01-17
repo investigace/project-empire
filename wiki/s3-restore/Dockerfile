@@ -8,9 +8,8 @@ RUN \
 	rm /var/cache/apk/*
 
 COPY start.sh /
-COPY backup.sh /
 
 RUN \
-	chmod +x /start.sh /backup.sh
+  chmod +x /start.sh
 
 ENTRYPOINT /start.sh
