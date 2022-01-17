@@ -71,6 +71,22 @@ And that's it. That's the whole Project Empire. If you want to install it and pl
 
 (TODO)
 
+### 2.1. Set up server with docker and docker-compose
+
+(TODO: offer setup of virtual server on Google Cloud, AWS and Digital ocean)
+
+### 2.2. Update DNS records
+
+(TODO: show what DNS records needs to be changed for primary or secondary domain set up)
+
+### 2.3. (optional) Set up Amazon S3 bucket for backups
+
+(TODO)
+
+### 2.4. Set up wiki using docker
+
+(TODO)
+
 ### 3. Push data from database to the wiki
 
 (TODO)
