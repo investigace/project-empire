@@ -7,6 +7,9 @@ services:
   db:
     restart: unless-stopped
 
+  s3-backup:
+    restart: unless-stopped
+
   certbot:
     build:
       context: ./certbot

@@ -33,3 +33,21 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-mediawiki}
       MYSQL_USER: ${MYSQL_USER:-mediawiki}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-mediawiki}
+
+  s3-backup:
+    build:
+      context: ./s3-backup
+      dockerfile: ./Dockerfile
+    links:
+      - db
+    volumes:
+      - ./mediawiki/shared:/mediawiki_shared:ro
+    environment:
+      BACKUP_ENABLE: ${BACKUP_ENABLE:-false}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+      BACKUP_S3_BUCKET_URL: ${BACKUP_S3_BUCKET_URL:-}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-mediawiki}
+      MYSQL_USER: ${MYSQL_USER:-mediawiki}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-mediawiki}
