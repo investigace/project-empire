@@ -1,0 +1,10 @@
+version: '3.6'
+
+services:
+  mediawiki:
+    ports:
+      - 3000:80
+
+  db:
+    ports:
+      - 3001:3306
