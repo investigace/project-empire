@@ -14,7 +14,7 @@ fi
 export REDIRECT_SSL_CERTIFICATE="/etc/letsencrypt/live/${REDIRECT_DOMAIN}/fullchain.pem"
 export REDIRECT_SSL_CERTIFICATE_KEY="/etc/letsencrypt/live/${REDIRECT_DOMAIN}/privkey.pem"
 
-if [ ! -f "$DEFAULT_SSL_CERTIFICATE" ]; then
+if [ ! -f "$REDIRECT_SSL_CERTIFICATE" ]; then
   export REDIRECT_SSL_CERTIFICATE="/etc/ssl/certs/localhost-selfsigned.crt"
   export REDIRECT_SSL_CERTIFICATE_KEY="/etc/ssl/certs/localhost-selfsigned.key"
 fi

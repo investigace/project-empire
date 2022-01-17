@@ -3,7 +3,7 @@
 export DOMAINS_LIST="$DOMAIN"
 
 if [ ! -z "$REDIRECT_DOMAIN" ]; then
-  DOMAINS_LIST="$DOMAIN $REDIRECT_DOMAIN"
+  export DOMAINS_LIST="$DOMAIN $REDIRECT_DOMAIN"
 fi
 
 for loop_domain in ${DOMAINS_LIST}; do

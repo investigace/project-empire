@@ -31,8 +31,8 @@ services:
     links:
       - mediawiki
     volumes:
-      - ./nginx/default.conf:/tmp/default.conf
-      - ./nginx/redirect.conf:/tmp/redirect.conf
+      - ./nginx/default.conf:/tmp/default.conf:ro
+      - ./nginx/redirect.conf:/tmp/redirect.conf:ro
       - ./certbot/www:/var/www/certbot:ro
       - ./certbot/letsencrypt:/etc/letsencrypt:ro
     environment:
