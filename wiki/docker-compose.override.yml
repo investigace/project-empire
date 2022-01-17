@@ -17,6 +17,7 @@ services:
       - ./certbot/letsencrypt:/etc/letsencrypt:rw
     environment:
       - DOMAIN=${DOMAIN}
+      - REDIRECT_DOMAIN=${REDIRECT_DOMAIN}
       - ADMIN_EMAIL=${ADMIN_EMAIL}
 
   nginx:
@@ -31,10 +32,12 @@ services:
       - mediawiki
     volumes:
       - ./nginx/default.conf:/tmp/default.conf
+      - ./nginx/redirect.conf:/tmp/redirect.conf
       - ./certbot/www:/var/www/certbot:ro
       - ./certbot/letsencrypt:/etc/letsencrypt:ro
     environment:
       - DOMAIN=${DOMAIN}
+      - REDIRECT_DOMAIN=${REDIRECT_DOMAIN}
     depends_on:
       - certbot
     command: /app/start.sh
