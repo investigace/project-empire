@@ -1,6 +1,6 @@
 # Project Empire
 
-Project Empire is a set of tools helping with keeping information about assets and companies of inluential people or groups. It was originally created for keeping information about business structures of prime minister and owner of vast business empire Andrej Babiš, but is now generalized and can be used for any person or group of interest.
+Project Empire is a set of tools designed to help with keeping information about assets and companies of inluential people or groups. It was originally created for business structures of former prime minister and owner of vast business empire Andrej Babiš, but is now generalized and can be used for anybody else.
 
 Project was created by [České centrum pro investigativní žurnalistiku, o.p.s.](https://www.investigace.cz/) and between September 2021 and January 2022 was funded by [Stars4Media innovation programme](https://stars4media.eu/).
 
@@ -86,7 +86,7 @@ Next step is installing Project Empire wiki. As mentioned before, wiki is a cust
 
 Start the installation by setting up a server preferrably running latest Ubuntu (at the time of writing the Ubuntu LTS version was 20.04), with docker and docker-compose installed, SSH access, public IPv4 address and reachable HTTP (80) and HTTPS (443) ports. It can be your own physical server as well as server set up by some cloud services provider.
 
-We expect that you are able to set up a server like that, but if not, [here is a tutorial how to set up such server on Google Cloud](/docs/set_up_wiki_server_on_google_cloud.md).
+We expect that you are able to set up a server like that, but if not, [here is a tutorial how to set up such server on DigitalOcean](/docs/set_up_wiki_server_on_digitalocean.md).
 ### 2.2. Update DNS records
 
 Continue with picking the domain where you want the wiki to be run and updating the DNS records. The wiki is prepared to be run on either separate domain (e.g. project-empire-wiki.org) or subdomain (e.g. project-empire-wiki.example.org). In case of separate domain, you want to create 2 A records pointing to the public IPv4 address of server, one for the plain domain and one for www subdomain (wiki takes care of the redirecting then). In case of subdomain, you want one A record for that subdomain pointing to the public IPv4 address of the server.
