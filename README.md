@@ -26,7 +26,6 @@ If you have any questions related to this project, please contact (FILL EMAIL)
     + [2.2. Update DNS records](22-update-dns-records)
     + [2.3. (optional) Set up Amazon S3 bucket for backups](#23-optional-set-up-amazon-s3-bucket-for-backups)
     + [2.4. Set up wiki using docker](#24-set-up-wiki-using-docker)
-    
   * [3. Push data from database to the wiki](#3-push-data-from-database-to-the-wiki)
   * [4. Learn to use other scripts](#4-learn-to-use-other-scripts)
 - [License](#license)
