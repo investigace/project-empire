@@ -69,14 +69,14 @@ And that's it. That's the whole Project Empire. If you want to install it and pl
 
 ### 1. Start your database
 
-First step in using Project Empire is to set up the database. Since the database is a simple Google spreadsheet, you can do that by making a copy of either the demo database spreadsheet or the empty database spreadsheet. You should be able to make a copy by clicking option _File > Make a copy_ and filling information about your new spreadsheet.
+First step in using Project Empire is to set up the database. Since the database is a simple Google spreadsheet, you can do that by making a copy of either the demo database spreadsheet or the empty database spreadsheet. You should be able to make a copy by opening the spreadsheet, clicking option _File > Make a copy_ and filling information about your new spreadsheet.
 
 * Demo database spreadsheet: https://docs.google.com/spreadsheets/d/1EJ-bP-qqTjZx2jcY6hfG3uAKvn6_FtCA-vqD4qVzn-k/edit
 * Empty database spreadsheet: https://docs.google.com/spreadsheets/d/19syMW_V3G6AmG0yIHBZzys2RfBH4zsAbObO5FrhjB68/edit
 
-When copied, you should fill your person or group of interest on sheet _0. Introduction_ and then continue with updating data on the other sheets.
+After the copy is created, fill your person or group of interest on sheet _0. Introduction_ and then continue with updating data on the other sheets.
 
-We recommend sharing the spreadsheet only to the specific people who will be collaborating on the data and not publicly as it may contain sensitive information and to have a place for keeping also private information which is not available through wiki.
+We recommend sharing the spreadsheet only to the specific people who will be collaborating on the data and not share it publicly as it may contain sensitive information.
 
 ### 2. Install wiki
 
@@ -84,14 +84,14 @@ Next step is installing Project Empire wiki. As mentioned before, wiki is a cust
 
 ### 2.1. Set up server with docker and docker-compose
 
-Start the installation by setting up a server preferrably running latest Ubuntu (at the time of writing the Ubuntu LTS version was 20.04), with docker and docker-compose installed, SSH access, public IPv4 address and reachable HTTP (80) and HTTPS (443) ports. It can be your own physical server as well as server set up by some cloud services provider.
+Start the installation by setting up a server preferrably running latest Ubuntu (at the time of writing the Ubuntu LTS version was 20.04), with docker and docker-compose installed, SSH access, public IPv4 address and reachable HTTP (80) and HTTPS (443) ports. It can be your own physical server as well as server set up at some cloud platform.
 
 We expect that you are able to set up a server like that, but if not, [here is a tutorial how to set up such server on DigitalOcean](/docs/set_up_wiki_server_on_digitalocean.md).
 ### 2.2. Update DNS records
 
-Continue with picking the domain where you want the wiki to be run and updating the DNS records. The wiki is prepared to be run on either separate domain (e.g. project-empire-wiki.org) or subdomain (e.g. project-empire-wiki.example.org). In case of separate domain, you want to create 2 A records pointing to the public IPv4 address of server, one for the plain domain and one for www subdomain (wiki takes care of the redirecting then). In case of subdomain, you want one A record for that subdomain pointing to the public IPv4 address of the server.
+Continue with picking the domain where you want the wiki to be run, you will need to update DNS records for it. The wiki is prepared to be run on either separate domain (e.g. project-empire-wiki.org) or subdomain (e.g. project-empire-wiki.example.org). In case of separate domain, you want to create two A records pointing to the public IPv4 address of server, one for the plain domain and one for www subdomain (wiki takes care of the redirecting then). In case of subdomain, you want one A record for that subdomain pointing to the public IPv4 address of the server.
 
-Example: If the server has public IPv4 address 1.2.3.4 and you want the wiki to run at subdomain project-empire-wiki.example.org, you want to add A record for project-empire-wiki.example.org with value 1.2.3.4.
+Example: If the server has public IPv4 address 1.2.3.4 and you want the wiki to run at subdomain project-empire-wiki.example.org, add A record for project-empire-wiki.example.org with value 1.2.3.4.
 
 After changing the DNS records please wait for them to propagate before continuing with the installation, because obtaining HTTPS certificates from Lets Encrypt depends on server being accessible at the picked domain or subdomain.
 
