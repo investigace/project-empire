@@ -153,9 +153,9 @@ Now if you navigate to the domain in your browser, you should see your Project E
 
 ### 3. Push data from database to the wiki
 
-When you have wiki running, next step is to push there the data from the database. We have prepared for it script written in Python you have to run on your machine.
+When you have wiki running, next step is to push there the data from the database. We have prepared for it script written in Python you have to run on your machine. Subsequent instructions expect *nix system, so if you are on Windows machine, run them in Windows Subsystem for Linux (WSL).
 
-To be able to run it, you first need to make sure you have Python of at least version 3.8 and have it available in terminal. To check that you can run following command to get the Python version:
+To be able to run the script, you first need to make sure you have Python of at least version 3.8 and have it available in terminal. To check both you can run following command to get the Python version:
 
 ```
 $ python3 --version
