@@ -3,3 +3,5 @@ __pycache__
 .env
 
 .DS_Store
+
+subsidies_of_cz_companies_from_hlidacstatu.xlsx

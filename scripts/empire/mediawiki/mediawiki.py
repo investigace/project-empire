@@ -56,7 +56,7 @@ class MediaWiki:
                 total += len(changes['pages']['delete'])
 
         progress_bar = enlighten.Counter(
-            total=total, desc='Pushing changes to Empire MediaWiki', unit='ticks')
+            total=total, desc='Pushing changes to Empire MediaWiki', unit='changes')
 
         if 'pages' in changes and 'create' in changes['pages']:
             for create_change in changes['pages']['create']:

@@ -4,6 +4,7 @@ iso3166==2.0.2
 Mako==1.1.6
 mwclient==0.10.1
 openpyxl==3.0.9
+python-slugify==4.0.1
 prettytable==2.4.0
 prompt-toolkit==3.0.24
 requests==2.25.1

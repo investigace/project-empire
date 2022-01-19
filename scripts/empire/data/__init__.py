@@ -7,3 +7,6 @@ from .other_relationship import OtherRelationship
 from .owner import Owner
 from .person import Person
 from .person_source import PersonSource
+from .subsidy import Subsidy
+from .subsidy_payment import SubsidyPayment
+from .subsidy_source import SubsidySource
