@@ -130,9 +130,10 @@ $ vim .env
 
 Each of the configuration options in `.env` is explained, so go through each of them and set them as you need. When finished, save the changes to the `.env` file and close it.
 
-Now we run the installation. Type in following:
+Now we run the installation. We recommend running it as root, so type in following:
 
 ```
+$ sudo su
 $ docker-compose up
 ```
 
@@ -152,7 +153,78 @@ Now if you navigate to the domain in your browser, you should see your Project E
 
 ### 3. Push data from database to the wiki
 
-(TODO)
+When you have wiki running, next step is to push there the data from the database. We have prepared for it script written in Python you have to run on your machine.
+
+To be able to run it, you first need to make sure you have Python of at least version 3.8 and have it available in terminal. To check that you can run following command to get the Python version:
+
+```
+$ python3 --version
+```
+
+Continue with cloning this repository to your machine and then open the `scripts` folder in the repository
+
+```
+$ git clone git@github.com:vlki/project-empire.git
+$ cd project-empire/scripts
+```
+
+We are using Python's virtual environment to separate all the libraries needed by scripts from other libraries you might have installed on your system. To initialize the virtual environment, run inside `scripts` folder:
+
+```
+$ python3 -m venv .venv
+$ . .venv/bin/activate
+```
+
+When inside virtual environment, install the libraries:
+
+```
+$ pip3 install -r requirements.txt
+```
+
+Now you should be set up to actually run the scripts. Note that next time you want to run the scripts, you don't need to fully initialize the virtual environment, it is enough to just run `. .venv/bin/activate`.
+
+The script for pushing data from the database currently cannot read data directly from Google spreadsheet, so to provide data you first need to download spreadsheet as Microsoft Excel file. Open your database Google spreadsheet, click option `File > Download > Microsoft Excel (.xlsx)` and save the Excel file somewhere on your system.
+
+Let's finally push the data. The script `push_empire_database_to_wiki.py` takes 3 arguments, path to the database Excel file, domain of the wiki and wiki user to use. Here is an example how we run it for the demo:
+
+```
+$ ./push_empire_database_to_wiki.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andrej\ Babiš\).xls project-empire-wiki-demo.vlki.cz admin
+```
+
+After that the script asks for password of the wiki user. When correct, the script will compute all the needed changes to the wiki pages and asks whether to do the actual changes. Here is an example of output when the script was first run for the demo:
+
+```
+$ ./push_empire_database_to_wiki.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andrej\ Babiš\).xlsx project-empire-wiki-demo.vlki.cz admin
+Password for user admin at Empire wiki https://project-empire-wiki-demo.vlki.cz/: ********************
+Loaded Empire database: 6 legal entities, 2 people, 0 subsidies
+Connected to Empire wiki
+Preparing changes to be pushed...
+
+Prepared following changes:
+
+Pages to be created:
+  AB private trust I
+  AB private trust II
+  AGROFERT, a.s.
+  AGROFERT, a.s. (1994-2005)
+  Agrofert USA, Inc.
+  SynBiol, a.s.
+  Andrej Babiš
+  Zbyněk Průša
+
+Pages to be updated:
+  Legal entities overview
+  People overview
+  Template:Empire summary table
+
+Are you sure you want to push these to Empire MediaWiki? (y/n)
+```
+
+If the changes look correct to you, you can type in `y` and that will push all the changes to wiki. Typing in `n` or anything else will stop the script.
+
+And that's it. Congratulations! After pushing is done, you should be able to see all the data in the wiki.
+
+Note that you have to run the script anytime you want to publish updated data from the database to wiki.
 
 ### 4. Learn to use other scripts
 
