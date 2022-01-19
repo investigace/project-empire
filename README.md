@@ -45,9 +45,9 @@ Let's show all the parts using demo data. We have put together tiny sample from 
 
 If you open the database, you can see that on the first sheet there is an introduction to that specific database. In our demo database we have 6 legal entities, 2 people and 2 subsidies. All the data is then organized in separate sheets.
 
-If you are interested in the legal entities like companies, trusts, etc., you can browse them in the sheet "1. Legal entities". People are in sheet "2. People" and subsidies in "3. Subsidies". The rest of sheets are additional information for each of these base data types.
+If you are interested in the legal entities like companies, trusts, etc., you can browse them in the sheet _1. Legal entities_. People are in sheet _2. People_ and subsidies in _3. Subsidies_. The rest of sheets are additional information for each of these base data types.
 
-One of the important parts of databases with business structures is keeping the relationships between legal entities and people. You can find these in sheets "1.1. Legal entities owners" and "1.2. Legal entities other relationships". It is important to keep the data organized like this as the scripts rely on the structure.
+One of the important parts of databases with business structures is keeping the relationships between legal entities and people. You can find these in sheets _1.1. Legal entities owners_ and _1.2. Legal entities other relationships_. It is important to keep the data organized like this as the scripts rely on the structure.
 
 Normally the database would not be publicly available, but only shared to people collaborating on the data. That's why part of Project Empire is also wiki, which allows publishing the database for anyone to browse through.
 
