@@ -1,6 +1,7 @@
 import locale
 from pprint import pprint
 
+import enlighten
 from iso3166 import countries
 
 from .countries import get_countries_in_other_group
@@ -17,6 +18,9 @@ def prepare_legal_entities_changes(mediawiki, empire_data):
     }
 
     # Legal entities pages
+
+    progress_bar = enlighten.Counter(
+        total=len(empire_data.get('legal_entities', [])), desc='Preparing legal entity pages', unit='pages')
 
     keep_page_names = []
 
@@ -43,6 +47,8 @@ def prepare_legal_entities_changes(mediawiki, empire_data):
             })
 
         keep_page_names.append(page_name.lower())
+
+        progress_bar.update()
 
     legal_entities_category = mediawiki.site.categories[get_legal_entities_category_name(mediawiki.lang)]
     for page in legal_entities_category.members():
@@ -111,6 +117,17 @@ def prepare_legal_entity_page(legal_entity, empire_data, lang):
             'info_line': ', '.join(info_line_items)
         }
 
+    def map_subsidy(subsidy):
+        total_amount_in_eur = 0.0
+        for payment in (p for p in empire_data.get('subsidies_payments', []) if p.subsidy == subsidy):
+            if payment.amount_in_eur:
+                total_amount_in_eur += payment.amount_in_eur
+        
+        return {
+            **vars(subsidy),
+            'total_amount_in_eur': total_amount_in_eur
+        }
+
     owners = list(map(map_owner, (o for o in empire_data['owners'] if o.owned_legal_entity == legal_entity)))
     owning = list(o for o in empire_data['owners'] if o.owner_legal_entity_or_person == legal_entity)
     other_relationships = list(map(map_other_relationship, (r for r in empire_data['other_relationships'] if r.legal_entity == legal_entity)))
@@ -118,6 +135,7 @@ def prepare_legal_entity_page(legal_entity, empire_data, lang):
     previous_addresses = list(pn for pn in empire_data['legal_entities_previous_addresses'] if pn.legal_entity == legal_entity)
     media_mentions = list(m for m in empire_data['legal_entities_media_mentions'] if m.legal_entity == legal_entity)
     sources = list(s for s in empire_data['legal_entities_sources'] if s.legal_entity == legal_entity)
+    subsidies = list(map(map_subsidy, (s for s in empire_data['subsidies'] if s.receiving_legal_entity == legal_entity)))
 
     empty_date_first = lambda date: str(date) if date is not None else '9999'
     owners = sorted(owners, key=lambda o: (empty_date_first(o['owned_until_date']), empty_date_first(o['owned_since_date'])), reverse=True)
@@ -125,6 +143,11 @@ def prepare_legal_entity_page(legal_entity, empire_data, lang):
     other_relationships = sorted(other_relationships, key=lambda r: locale.strxfrm(r['related_name']))
     previous_names = sorted(previous_names, key=lambda pn: (empty_date_first(pn.named_until_date), empty_date_first(pn.named_since_date)), reverse=True)
     previous_addresses = sorted(previous_addresses, key=lambda pa: (empty_date_first(pa.address_until_date), empty_date_first(pa.address_since_date)), reverse=True)
+    subsidies = sorted(subsidies, key=lambda s: str(s['year']), reverse=True)
+
+    subsidies_sum = 0.0
+    for subsidy in subsidies:
+        subsidies_sum += subsidy['total_amount_in_eur']
 
     return render_page_template(lang, 'legal_entity.mako', {
         'legal_entity': legal_entity,
@@ -134,7 +157,10 @@ def prepare_legal_entity_page(legal_entity, empire_data, lang):
         'previous_names': previous_names,
         'previous_addresses': previous_addresses,
         'media_mentions': media_mentions,
-        'sources': sources
+        'sources': sources,
+        'subsidies': subsidies,
+        'subsidies_count': len(subsidies),
+        'subsidies_sum': subsidies_sum
     })
 
 
@@ -172,7 +198,34 @@ def prepare_legal_entities_overview_page(empire_data, lang):
     if len(other_countries_item['legal_entities']) > 0:
         legal_entities_by_country.append(other_countries_item)
 
-    return render_page_template(lang, 'legal_entities_overview.mako', {'legal_entities_by_country': legal_entities_by_country})
+    def map_subsidy(subsidy):
+        total_amount_in_eur = 0.0
+        for payment in (p for p in empire_data.get('subsidies_payments', []) if p.subsidy == subsidy):
+            if payment.amount_in_eur:
+                total_amount_in_eur += payment.amount_in_eur
+        
+        return {
+            **vars(subsidy),
+            'total_amount_in_eur': total_amount_in_eur
+        }
+
+    stats_by_legal_entity = {}
+    for legal_entity in empire_data.get('legal_entities', []):
+        subsidies = list(map(map_subsidy, (s for s in empire_data['subsidies'] if s.receiving_legal_entity == legal_entity)))
+
+        subsidies_sum = 0.0
+        for subsidy in subsidies:
+            subsidies_sum += subsidy['total_amount_in_eur']
+        
+        stats_by_legal_entity[legal_entity.database_identifier] = {
+            'subsidies_count': len(subsidies),
+            'subsidies_sum': subsidies_sum
+        }
+
+    return render_page_template(lang, 'legal_entities_overview.mako', {
+        'legal_entities_by_country': legal_entities_by_country,
+        'stats_by_legal_entity': stats_by_legal_entity
+    })
 
 def get_legal_entities_category_name(lang):
     return {

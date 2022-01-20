@@ -6,7 +6,8 @@ from openpyxl import load_workbook
 
 from ..data import LegalEntity, LegalEntityPreviousAddress, \
     LegalEntityPreviousName, LegalEntityMediaMention, LegalEntitySource, \
-    Owner, OtherRelationship, Person, PersonSource
+    Owner, OtherRelationship, Person, PersonSource, Subsidy, SubsidyPayment, \
+    SubsidySource
 
 
 def load_excel(excel_path):
@@ -14,15 +15,17 @@ def load_excel(excel_path):
 
     legal_entities = load_legal_entities(wb)
     people = load_people(wb)
-    subsidies = [] # TODO
+    subsidies = load_subsidies(wb, legal_entities)
 
     owners = load_owners(wb, legal_entities, people)
     other_relationships = load_other_relationships(wb, legal_entities, people)
     legal_entities_previous_names = load_legal_entities_previous_names(wb, legal_entities)
     legal_entities_previous_addresses = load_legal_entities_previous_addresses(wb, legal_entities)
     legal_entities_sources = load_legal_entities_sources(wb, legal_entities)
-    legal_entities_media_mentions = load_legal_entities_media_mentions(wb, legal_entities)
+    legal_entities_media_mentions = load_legal_entities_media_mentions(wb, legal_entities)    
     people_sources = load_people_sources(wb, people)
+    subsidies_payments = load_subsidies_payments(wb, subsidies)
+    subsidies_sources = load_subsidies_sources(wb, subsidies)
 
     return {
         'legal_entities': legal_entities,
@@ -35,7 +38,9 @@ def load_excel(excel_path):
         'legal_entities_previous_addresses': legal_entities_previous_addresses,
         'legal_entities_sources': legal_entities_sources,
         'legal_entities_media_mentions': legal_entities_media_mentions,
-        'people_sources': people_sources
+        'people_sources': people_sources,
+        'subsidies_payments': subsidies_payments,
+        'subsidies_sources': subsidies_sources
     }
 
 def load_legal_entities(wb):
@@ -505,6 +510,152 @@ def load_people_sources(wb, people):
             sources.append(PersonSource(**source_data))
 
     return sources
+
+
+def load_subsidies(wb, legal_entities):
+    sheet_name = '3. Subsidies'
+    ws = wb[sheet_name]
+
+    cols_map = {
+        'Database identifier': 'database_identifier',
+        'Receiving legal entity reference': 'receiving_legal_entity',
+        'Year': 'year',
+        'Project name': 'project_name',
+        'Project code': 'project_code',
+        'Programme name': 'programme_name',
+        'Programme code': 'programme_code',
+        'Notes': 'notes'
+    }
+    cols_by_number = get_col_sheet_names_by_number(ws, cols_map)
+
+    subsidies = []
+
+    data_rows = ws.iter_rows(min_row=5, max_row=ws.max_row)
+    for row in data_rows:
+        subsidy_data = {}
+
+        for cell in row:
+            if cell.column in cols_by_number and cell.value is not None:
+                col_sheet_name = cols_by_number[cell.column]
+
+                value = cell.value
+
+                if isinstance(value, str):
+                    value = value.strip()
+
+                if col_sheet_name in ['Receiving legal entity reference']:
+                    found_legal_entity = next((le for le in legal_entities if le.database_identifier == value), None)
+
+                    if found_legal_entity is None:
+                        raise Exception(f'Subsidy in row {cell.row} of sheet "{sheet_name}" is in column "{col_sheet_name}" referencing legal entity "{value}", but no legal entity with such Database identifier exists.')
+
+                    value = found_legal_entity
+
+                subsidy_data[cols_map[col_sheet_name]] = value
+
+        if subsidy_data:
+            subsidies.append(Subsidy(**subsidy_data))
+
+    return subsidies
+
+
+def load_subsidies_payments(wb, subsidies):
+    sheet_name = '3.1. Subsidies payments'
+    ws = wb[sheet_name]
+
+    cols_map = {
+        'Subsidy reference': 'subsidy',
+        'Provider': 'provider',
+        'Year': 'year',
+        'Original currency': 'original_currency',
+        'Amount in original currency': 'amount_in_original_currency',
+        'Amount in EUR': 'amount_in_eur',
+        'Notes': 'notes'
+    }
+    cols_by_number = get_col_sheet_names_by_number(ws, cols_map)
+
+    subsidies_payments = []
+
+    data_rows = ws.iter_rows(min_row=5, max_row=ws.max_row)
+    for row in data_rows:
+        subsidy_payment_data = {}
+
+        for cell in row:
+            if cell.column in cols_by_number and cell.value is not None:
+                col_sheet_name = cols_by_number[cell.column]
+
+                value = cell.value
+
+                if isinstance(value, str):
+                    value = value.strip()
+
+                if col_sheet_name in ['Amount in original currency', 'Amount in EUR']:
+                    # try:
+                    value = float(str(value).replace(',', '').replace(' ', ''))
+                    # except ValueError:
+                    #     pass
+
+                if col_sheet_name in ['Subsidy reference']:
+                    found_subsidy = next((s for s in subsidies if s.database_identifier == value), None)
+
+                    if found_subsidy is None:
+                        raise Exception(f'Subsidy payment in row {cell.row} of sheet "{sheet_name}" is in column "{col_sheet_name}" referencing subsidy "{value}", but no subsidy with such Database identifier exists.')
+
+                    value = found_subsidy
+
+                subsidy_payment_data[cols_map[col_sheet_name]] = value
+
+        if subsidy_payment_data:
+            subsidies_payments.append(SubsidyPayment(**subsidy_payment_data))
+
+    return subsidies_payments
+
+
+def load_subsidies_sources(wb, subsidies):
+    sheet_name = '3.2. Subsidies sources'
+    ws = wb[sheet_name]
+
+    cols_map = {
+        'Subsidy reference': 'subsidy',
+        'Source summary': 'summary',
+        'Information gained from source': 'information_gained_from_source',
+        'Source last checked date': 'last_checked_date',
+        'Source URL': 'url'
+    }
+    cols_by_number = get_col_sheet_names_by_number(ws, cols_map)
+
+    subsidies_sources = []
+
+    data_rows = ws.iter_rows(min_row=5, max_row=ws.max_row)
+    for row in data_rows:
+        subsidy_source_data = {}
+
+        for cell in row:
+            if cell.column in cols_by_number and cell.value is not None:
+                col_sheet_name = cols_by_number[cell.column]
+
+                value = cell.value
+
+                if isinstance(value, str):
+                    value = value.strip()
+
+                if col_sheet_name == 'Source last checked date':
+                    value = parse_date(value)
+
+                if col_sheet_name in ['Subsidy reference']:
+                    found_subsidy = next((s for s in subsidies if s.database_identifier == value), None)
+
+                    if found_subsidy is None:
+                        raise Exception(f'Subsidy source in row {cell.row} of sheet "{sheet_name}" is in column "{col_sheet_name}" referencing subsidy "{value}", but no subsidy with such Database identifier exists.')
+
+                    value = found_subsidy
+
+                subsidy_source_data[cols_map[col_sheet_name]] = value
+
+        if subsidy_source_data:
+            subsidies_sources.append(SubsidySource(**subsidy_source_data))
+
+    return subsidies_sources
 
 
 def get_col_sheet_names_by_number(ws, cols_map):

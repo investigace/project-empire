@@ -1,5 +1,6 @@
 from pprint import pprint
 
+import enlighten
 from iso3166 import countries
 
 from .countries import get_countries_in_other_group
@@ -16,6 +17,9 @@ def prepare_people_changes(mediawiki, empire_data):
     }
 
     # People pages
+
+    progress_bar = enlighten.Counter(
+        total=len(empire_data.get('people', [])), desc='Preparing person pages', unit='pages')
 
     keep_page_names = []
 
@@ -42,6 +46,8 @@ def prepare_people_changes(mediawiki, empire_data):
             })
 
         keep_page_names.append(page_name.lower())
+
+        progress_bar.update()
 
     people_category = mediawiki.site.categories[get_people_category_name(mediawiki.lang)]
     for page in people_category.members():

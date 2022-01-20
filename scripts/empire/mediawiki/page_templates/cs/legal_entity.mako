@@ -102,6 +102,28 @@
 ''Nemá další vztahy / No other relationships''
 % endif
 
+== Dotace / Subsidies ==
+
+* Počet dotací / Subsidies count: ${subsidies_count}
+* Celková částka [EUR] / Total amount [EUR]: ${format_amount(subsidies_sum)}
+% if len(subsidies) > 0:
+
+{| class="wikitable sortable"
+|-
+! style="text-align:left;" | Identifikátor / Identifier
+! style="text-align:left;" | Rok / Year
+! style="text-align:left;" | Název projektu / Project name
+! style="text-align:right;" data-sort-type="number" | Celková částka dotace [EUR] / Subsidy total amount [EUR]
+% for subsidy in subsidies:
+|-
+| style="text-align:left;" | [[${subsidy['database_identifier']}]]
+| style="text-align:left;" | ${to_s(subsidy['year'])}
+| style="text-align:left;" | ${to_s(subsidy['project_name'])}
+| style="text-align:right;" data-sort-value="${subsidy['total_amount_in_eur']}" | ${format_amount(subsidy['total_amount_in_eur'])}
+% endfor
+|}
+% endif
+
 == Předchozí názvy / Previous names ==
 
 % if len(previous_names) > 0:

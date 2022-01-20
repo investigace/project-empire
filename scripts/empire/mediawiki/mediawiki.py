@@ -7,6 +7,7 @@ import mwclient
 
 from .legal_entities import prepare_legal_entities_changes
 from .people import prepare_people_changes
+from .subsidies import prepare_subsidies_changes
 from .summary import prepare_summary_changes
 
 
@@ -40,6 +41,8 @@ class MediaWiki:
             changes, prepare_legal_entities_changes(self, empire_data))
         changes = self._merge_changes(
             changes, prepare_people_changes(self, empire_data))
+        changes = self._merge_changes(
+            changes, prepare_subsidies_changes(self, empire_data))
         changes = self._merge_changes(
             changes, prepare_summary_changes(self, empire_data))
 

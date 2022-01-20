@@ -50,6 +50,8 @@ if __name__ == "__main__":
 
     # Load data
 
+    print('Loading Empire database...')
+
     empire_data = empire.load_excel(args.database_excel)
 
     print(f"Loaded Empire database: {len(empire_data['legal_entities'])} legal entities, {len(empire_data['people'])} people, {len(empire_data['subsidies'])} subsidies")
@@ -89,7 +91,7 @@ if __name__ == "__main__":
             print(f"  {page_delete_change['name']}")
 
     print('')
-    answer = confirm("Are you sure you want to push these to Empire MediaWiki?")
+    answer = confirm(f"Are you sure you want to push these to Empire wiki {wiki_url}?")
     if answer != True:
         print('Ok, not pushing anything')
         exit(0)
