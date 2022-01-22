@@ -543,6 +543,10 @@ def load_subsidies(wb, legal_entities):
                 if isinstance(value, str):
                     value = value.strip()
 
+                if col_sheet_name in ['Year']:
+                    if isinstance(value, float):
+                        value = int(value)
+
                 if col_sheet_name in ['Receiving legal entity reference']:
                     found_legal_entity = next((le for le in legal_entities if le.database_identifier == value), None)
 
@@ -590,10 +594,11 @@ def load_subsidies_payments(wb, subsidies):
                     value = value.strip()
 
                 if col_sheet_name in ['Amount in original currency', 'Amount in EUR']:
-                    # try:
                     value = float(str(value).replace(',', '').replace(' ', ''))
-                    # except ValueError:
-                    #     pass
+
+                if col_sheet_name in ['Year']:
+                    if isinstance(value, float):
+                        value = int(value)
 
                 if col_sheet_name in ['Subsidy reference']:
                     found_subsidy = next((s for s in subsidies if s.database_identifier == value), None)
