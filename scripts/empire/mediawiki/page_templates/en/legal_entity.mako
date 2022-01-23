@@ -168,7 +168,7 @@
 
 % if len(media_mentions) > 0:
 % for media_mention in media_mentions:
-* ${media_mention.summary + ' ' if media_mention.summary else ''}[${media_mention.url} ${media_mention.url}]${' Last checked: ' + media_mention.last_checked_date if media_mention.last_checked_date else ''}
+* ${media_mention.summary + ' ' if media_mention.summary else ''}[${media_mention.url} ${media_mention.url}]${' Last checked: ' + media_mention.last_checked_date.strftime('%Y-%m-%d') if media_mention.last_checked_date else ''}
 % endfor
 % endif
 % if len(media_mentions) == 0:
