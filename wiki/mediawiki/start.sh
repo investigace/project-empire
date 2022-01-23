@@ -44,6 +44,9 @@ if [ ! -f "/opt/mediawiki_shared/LocalSettings.php" ]; then
   # Enable EmbedVideo extension
   echo "wfLoadExtension( 'EmbedVideo' );" >> /opt/mediawiki_shared/LocalSettings.php
 
+  # Enable Cite extension
+  echo "wfLoadExtension( 'Cite' );" >> /opt/mediawiki_shared/LocalSettings.php
+
   # Install pages
   for page_path in "$install_pages_dir"/*
   do
