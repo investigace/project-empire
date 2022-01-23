@@ -21,8 +21,11 @@ COPY extensions/Iframe-v0.09 /var/www/html/extensions/Iframe
 
 # Create directory shared with host system
 RUN mkdir -p /opt/mediawiki_shared
+RUN mkdir /opt/mediawiki_shared/images
+RUN mkdir /opt/mediawiki_shared/public
 RUN rm -r /var/www/html/images
 RUN ln -s /opt/mediawiki_shared/images /var/www/html/images
+RUN ln -s /opt/mediawiki_shared/public /var/www/html/public
 RUN ln -s /opt/mediawiki_shared/LocalSettings.php /var/www/html/LocalSettings.php
 
 CMD ["apache2-foreground"]
