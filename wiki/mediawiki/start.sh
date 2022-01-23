@@ -35,7 +35,7 @@ if [ ! -f "/opt/mediawiki_shared/LocalSettings.php" ]; then
   sed -i "s/\$wgPasswordSender.*/\$wgPasswordSender = \"${ADMIN_EMAIL}\";/g" /opt/mediawiki_shared/LocalSettings.php
 
   # Change logo
-  sed -i "s/\$wgLogos.*/\$wgLogos = \['1x'=>\$wgResourceBasePath \. '\/project_empire_wiki_logo.svg'\];/g" /opt/mediawiki_shared/LocalSettings.php
+  sed -i "s/\$wgLogos.*/\$wgLogos = \['1x'=>\$wgResourceBasePath \. '\/public\/project_empire_wiki_logo.svg'\];/g" /opt/mediawiki_shared/LocalSettings.php
 
   # Enable Iframe extension
   echo "wfLoadExtension( 'Iframe' );" >> /opt/mediawiki_shared/LocalSettings.php
