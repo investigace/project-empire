@@ -1,3 +1,4 @@
+from .ares.ares import Ares
 from .convert_currency import convert_currency
 from .data import LegalEntity, LegalEntityPreviousAddress, \
     LegalEntityPreviousName, LegalEntityMediaMention, LegalEntitySource, \
