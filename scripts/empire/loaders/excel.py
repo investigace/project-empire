@@ -75,6 +75,10 @@ def load_legal_entities(wb):
                 if isinstance(value, str):
                     value = value.strip()
 
+                if col_sheet_name in ['Identification number']:
+                    if isinstance(value, float):
+                        value = int(value)
+
                 if col_sheet_name == 'Foundation date' or col_sheet_name == 'Dissolution date':
                     value = parse_date(value)
 

@@ -108,8 +108,8 @@ if __name__ == "__main__":
             subsidy_payment.provider,
             subsidy_payment.year,
             subsidy_payment.original_currency,
-            subsidy_payment.amount_in_original_currency,
-            subsidy_payment.amount_in_eur,
+            f'{subsidy_payment.amount_in_original_currency:,.2f}' if subsidy_payment.amount_in_original_currency else None,
+            f'{subsidy_payment.amount_in_eur:,.2f}' if subsidy_payment.amount_in_eur else None,
             subsidy_payment.notes
         ])
 

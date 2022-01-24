@@ -54,6 +54,6 @@ def convert_czk_to_eur(amount, year):
         note = f"Částka v EUR dle kurzu CZK/EUR {rate:.3f} z roku {rate_year}. Zdroj: Devízové kurzy vedené Českou národní bankou. Dostupné z: https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/prumerne_form.html"
 
     return (
-        round(decimal.Decimal(amount) / decimal.Decimal(rate)),
+        float(round(decimal.Decimal(amount) / decimal.Decimal(rate))),
         note
     )

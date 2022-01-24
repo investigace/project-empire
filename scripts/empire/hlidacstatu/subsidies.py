@@ -188,11 +188,11 @@ def map_hlidacstatu_subsidy_to_empire_subsidy(legal_entity, hs_subsidy):
 
         amount_in_original_currency = None
         if drawed_amount:
-            amount_in_original_currency = drawed_amount
+            amount_in_original_currency = float(drawed_amount)
         elif decided_amount:
-            amount_in_original_currency = decided_amount
+            amount_in_original_currency = float(decided_amount)
         elif requested_amount:
-            amount_in_original_currency = requested_amount
+            amount_in_original_currency = float(requested_amount)
 
         payment_year = None
         if hs_rozhodnuti.get('rok'):
