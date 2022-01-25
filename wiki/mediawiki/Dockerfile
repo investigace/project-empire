@@ -23,7 +23,7 @@ RUN ln -s /opt/mediawiki_shared/public /var/www/html/public
 RUN ln -s /opt/mediawiki_shared/LocalSettings.php /var/www/html/LocalSettings.php
 
 # Add logo and install pages
-COPY project_empire_wiki_logo.svg /var/www/html/public/project_empire_wiki_logo.svg
+COPY project_empire_wiki_logo.svg /var/www/html/project_empire_wiki_logo.svg
 COPY install_pages /root/install_pages
 
 CMD ["apache2-foreground"]
