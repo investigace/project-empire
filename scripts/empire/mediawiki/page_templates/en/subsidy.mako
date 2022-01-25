@@ -68,4 +68,4 @@ ${subsidy.notes if subsidy.notes else "''No notes''"}
 ''No sources''
 % endif
 
-[[Kategorie:Subsidies]]
+[[Category:Subsidies]]
