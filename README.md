@@ -11,7 +11,7 @@ Currently running Project Empire wikis:
 | Andrej Babiš       | https://noveimperiumab.vlki.cz/ (UPDATE WITH FINAL DOMAIN) |
 | Daniel Křetínský   |  https://empirekretinsky.vlki.cz/ (UPDATE WITH FINAL DOMAIN)  |
 
-If you have any questions related to this project, please contact (FILL EMAIL)
+If you have any questions related to this project, please contact [it@investigace.cz](mailto:it@investigace.cz).
 
 ## Table of contents
 
@@ -226,10 +226,59 @@ And that's it. Congratulations! After pushing is done, you should be able to see
 
 Note that you have to run the script anytime you want to publish updated data from the database to wiki.
 
-### 4. Learn to use other scripts
+---
 
-(TODO)
+## Database documentation
 
+We have built the Project Empire database structure to best accommodate all the different data we encountered when mapping business empires and we will explain the structure in the following sections. Scripts and wiki depend on this structure — sheets and columns having correct names and data being in specific format —, but we understand that the needs of your projects can vary and there are safe ways to adjust the structure without breaking any of the scripts and wiki features. Adjusting is explained right after all the database spreadsheet sheets.
+
+### _0. Introduction_ sheet
+
+This sheet is only informative and is not used by scripts or wiki at all. Feel free to remove or completely change as you desire.
+
+### _1. Legal entities_ sheet
+
+First of the 3 main sheets keeping information about legal entities like companies, trusts, etc. Every row in this sheet is one legal entity and its current details.
+
+| Column | Example value | Explanation |
+| ------ | ------------- | ----------- |
+| _Database identifier_ | AGROFERT, a.s. | Unique identification in this database. Should be name of the legal entity.<br><br>When other sheets are referencing legal entity, they are referencing what is written in this column.<br><br>If there are more legal entities with same name, then they should be differentiated by adding explanation to the parenthesis. Eg. if there are two Acme Ltd. companies and one is in United Kingdom and the other in New Zealand, then one would could have identifier "Acme Ltd. (UK)" and the other "Acme Ltd. (NZ)" |
+| _Legal entity type_ | Company | Type of legal entity. Whether it is company, trust, etc. Scripts and wiki do not rely on any specific values here, so feel free to differentiate legal entity types by any values you wish. |
+| _Name_ | | |
+| _Country_ | | |
+| _Identification number_ | | |
+| _Address_ | | |
+| _Foundation date_ | | |
+| _Dissolution date_ | | |
+| _Other notes_ | | |
+
+### _1.1. Legal entities owners_ sheet
+
+TODO
+
+### _1.2. Legal entities other relationships_ sheet
+
+TODO
+
+### _1.3. Legal entities sources_ sheet
+
+TODO
+
+### Adjusting structure
+
+TODO
+
+---
+
+## Wiki documentation
+
+### Restore wiki from S3 backup
+
+---
+
+## Scripts documentation
+
+---
 ## License
 
 Everything in this repository is licensed under [GNU General Public License v3.0](https://github.com/vlki/project-empire/blob/main/LICENSE).
