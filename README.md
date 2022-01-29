@@ -23,7 +23,7 @@ If you have any questions related to this project, please contact [it@investigac
   * [1. Start your database](#1-start-your-database)
   * [2. Install wiki](#2-install-wiki)
     + [2.1. Set up server with docker and docker-compose](#21-set-up-server-with-docker-and-docker-compose)
-    + [2.2. Update DNS records](22-update-dns-records)
+    + [2.2. Update DNS records](#22-update-dns-records)
     + [2.3. (optional) Set up Amazon S3 bucket for backups](#23-optional-set-up-amazon-s3-bucket-for-backups)
     + [2.4. Set up wiki using docker](#24-set-up-wiki-using-docker)
   * [3. Push data from database to the wiki](#3-push-data-from-database-to-the-wiki)
@@ -226,6 +226,8 @@ And that's it. Congratulations! After pushing is done, you should be able to see
 
 Note that you have to run the script anytime you want to publish updated data from the database to wiki.
 
+[↑ Jump to Table of Contents](#table-of-contents)
+
 ---
 
 ## Database documentation
@@ -268,18 +270,26 @@ TODO
 
 TODO
 
+[↑ Jump to Table of Contents](#table-of-contents)
+
 ---
 
 ## Wiki documentation
 
 ### Restore wiki from S3 backup
 
+[↑ Jump to Table of Contents](#table-of-contents)
+
 ---
 
 ## Scripts documentation
+
+[↑ Jump to Table of Contents](#table-of-contents)
 
 ---
 ## License
 
 Everything in this repository is licensed under [GNU General Public License v3.0](https://github.com/vlki/project-empire/blob/main/LICENSE).
+
+[↑ Jump to Table of Contents](#table-of-contents)
 
