@@ -72,6 +72,8 @@ The script is a Python command line script, so you have to be at least slightly 
 
 And that's it. That's the whole Project Empire. If you want to install it and play with it yourself, you can find the documentation for it below.
 
+[↑ Jump to Table of Contents](#table-of-contents)
+
 ---
 
 ## How to use Project Empire?
@@ -245,7 +247,7 @@ This sheet is only informative and is not used by scripts or wiki at all. Feel f
 
 ### _1. Legal entities_ sheet
 
-First of the 3 main sheets keeping information about legal entities like companies, trusts, etc. Every row in this sheet is one legal entity and its current details.
+First of the 3 main sheets, keeping information about legal entities like companies, trusts, etc. Every row in this sheet is one legal entity and its current details.
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
@@ -261,15 +263,157 @@ First of the 3 main sheets keeping information about legal entities like compani
 
 ### _1.1. Legal entities owners_ sheet
 
-TODO
+Sheet with information about legal entity owners. Every row in this sheet is one owner record for referenced legal entity. Ownerships are separate from other relationships as they are especially important when mapping the business structure and as the ownerships have the additional _Owned percentage_ column.
+
+Note that there are 2 types of ownership records you can define using this sheet. Either referencing one, which references some legal entity or person you have in the database, or partial one, which does not reference. The partial record can be useful eg. when you want full ownership history for some company, but don't actually want to track all the owners in the database, because some owners are not part of the business empire you are after.
+
+| Column | Example value | Required | Explanation |
+| ------ | ------------- | -------- | ----------- |
+| _Owned legal entity reference_ | AGROFERT, a.s. | Yes | |
+| _Owner legal entity or person reference_ | Andrej Babiš | No | |
+| _Owner type_ | Person | Yes | |
+| _Owner name_ | Andrej Babiš | Yes | |
+| _Owner country_ | CZ | No | |
+| _Owner address_ | Pyšelská 2327/2, Chodov, 149 00 Praha 4 | No | |
+| _Owner legal entity identification number_ | 26185610 | No | |
+| _Owner person date of birth_ | 2000-01-01 | No | |
+| _Owned percentage_ | 100 | No | |
+| _Owned since date_ | 2005-05-30 | No | |
+| _Owned until date_ | 2017-02-02 | No | |
+| _Ownership details_ | In 2017 transferred ownership to trusts | No | |
 
 ### _1.2. Legal entities other relationships_ sheet
 
-TODO
+Sheet with information about other legal entity relationships than ownerships. Every row in this sheet is one relationship to some other legal entity or person, for example who was director of legal entity.
+
+Note that there are 2 types of relationship records you can define using this sheet. Either referencing one, which references some legal entity or person you have in the database, or partial one, which does not reference. The partial record can be useful eg. when you want full relationship history for some company, but don't actually want to track all the related people and legal entities in the database, because some of those are not part of the business empire you are after.
+
+| Column | Example value | Required | Explanation |
+| ------ | ------------- | -------- | ----------- |
+| _Legal entity reference_ | AGROFERT, a.s. | Yes | |
+| _Related legal entity or person reference_ | Andrej Babiš | No | |
+| _Related type_ | Person | Yes | |
+| _Related name_ | Andrej Babiš | Yes | |
+| _Related country_ | CZ | No | |
+| _Related address_ | Pyšelská 2327/2, Chodov, 149 00 Praha 4 | No | |
+| _Related legal entity identification number_ | 26185610 | No | |
+| _Related person date of birth_ | 2000-01-01 | No | |
+| _Related since date_ | 2005-05-30 | No | |
+| _Related until date_ | 2017-02-02 | No | |
+| _Relationship details_ | Chairman of the board | No | |
 
 ### _1.3. Legal entities sources_ sheet
 
-TODO
+Sheet with sources of information about legal entities. If you don't need structured sources, it is enough to list sources in _Other notes_ of legal entity. Every row in this sheet is one source used to gain information about a legal entity.
+
+| Column | Example value | Required | Explanation |
+| ------ | ------------- | -------- | ----------- |
+| _Legal entity reference_ | AGROFERT, a.s. | Yes | |
+| _Source summary_ | Veřejný Rejstřík a Sbírka Listin - Ministerstvo Spravedlnosti České Republiky. Justice.cz. | No | |
+| _Information gained from source_ | Company identifier, names, addresses, foundation date | No | |
+| _Source last checked date_ | 2020-07-06 | No | |
+| _Source URL_ | https://or.justice.cz/ias/ui/rejstrik-firma.vysledky?subjektId=525681&typ=UPLNY | No | |
+
+### _1.4. Legal entities previous names_ sheet
+
+Sheet for previous names of legal entities. You might not need previous names this much structured, but structure here can be useful when searching for historical records where the legal entity can be using some previous name.
+
+| Column | Example value | Required | Explanation |
+| ------ | ------------- | -------- | ----------- |
+| _Legal entity reference_ | SynBiol, a.s. | Yes | |
+| _Previous name_ | SYNTHESIA a.s. | Yes | |
+| _Named since date_ | 2004-11-08 | No | |
+| _Named until date_ | 2006-03-27 | No | |
+
+### _1.5. Legal entities previous addresses_ sheet
+
+Sheet for previous addresses of legal entities. You might not need previous addresses this much structured, but structure here can be useful when searching for historical records where the legal entity can be using some previous address.
+
+| Column | Example value | Required | Explanation |
+| ------ | ------------- | -------- | ----------- |
+| _Legal entity reference_ | AGROFERT, a.s. | Yes | |
+| _Previous address_ | Pyšelská 1234, Chodov, 149 00 Praha 4 | Yes | |
+| _Address since date_ | 2004-11-08 | No | |
+| _Address until date_ | 2006-03-27 | No | |
+
+### _1.6. Legal entities media mentions_ sheet
+
+Sheet for information about mentions of legal entity in media. Every row in this sheet is one mention in media.
+
+| Column | Example value | Required | Explanation |
+| ------ | ------------- | -------- | ----------- |
+| _Legal entity reference_ | AGROFERT, a.s. | Yes | |
+| _Summary of the media mention_ | Wikipedia page | No | |
+| _Media last checked date_ | 2022-01-01 | No | |
+| _Media mention url_ | https://cs.wikipedia.org/wiki/Agrofert | No | |
+
+### _2. People_ sheet
+
+Second of the 3 main sheets, keeping information about people. Every row in this sheet is one person and their current details.
+
+| Column | Example value | Required | Explanation |
+| ------ | ------------- | -------- | ----------- |
+| _Database identifier_ | Andrej Babiš | Yes | |
+| _Full name_ | Andrej Babiš | Yes | |
+| _Nationality_ | CZ | No | |
+| _Date of birth_ | 2000-01-01 | No | |
+| _Residence country_ | CZ | No | |
+| _Residence full address_ | Pyšelská 2327/2, Chodov, 149 00 Praha 4 | No | |
+| _Residence only city_ | Praha 4 | No | |
+| _Other notes_ | Former prime minister of Czechia | No | |
+
+### _2.1. People sources_ sheet
+
+Sheet with sources of information about people. If you don't need structured sources, it is enough to list sources in _Other notes_ of person. Every row in this sheet is one source used to gain information about a person.
+
+| Column | Example value | Required | Explanation |
+| ------ | ------------- | -------- | ----------- |
+| _Person reference_ | Andrej Babiš | Yes | |
+| _Source summary_ | AGROFERT INC. :: Massachusetts (US) :: OpenCorporates. Opencorporates.Com. | No | |
+| _Information gained from source_ | Connection to AGROFERT INC. | No | |
+| _Source last checked date_ | 2020-07-06 | No | |
+| _Source URL_ | https://opencorporates.com/companies/us_ma/383446187 | No | |
+
+### _3. Subsidies_ sheet
+
+Third of the 3 main sheets, keeping information about subsidies. Every row in this sheet is one subsidy and its details. Note that this sheet does not have any amount columns, because the subsidies are often split into more payments from different providers or in different years and we keep the amounts on the payments only.
+
+| Column | Example value | Required | Explanation |
+| ------ | ------------- | -------- | ----------- |
+| _Database identifier_ | | Yes | |
+| _Receiving legal entity reference_ | | Yes | |
+| _Year_ | | No | |
+| _Project name_ | | No | |
+| _Project code_ | | No | |
+| _Programme name_ | | No | |
+| _Programme code_ | | No | |
+| _Notes_ | | No | |
+
+### _3.1. Subsidies payments_ sheet
+
+Sheet for keeping information about subsidy payments. Every row in this sheet is payment from one provider in given year belonging to some subsidy.
+
+| Column | Example value | Required | Explanation |
+| ------ | ------------- | -------- | ----------- |
+| _Subsidy reference_ | | Yes | |
+| _Provider_ | | No | |
+| _Year_ | | No | |
+| _Original currency_ | | No | |
+| _Amount in original currency_ | | No | |
+| _Amount in EUR_ | | No | |
+| _Notes_ | | No | |
+
+### _3.2. Subsidies sources_ sheet
+
+Sheet with sources of information about subsidies. If you don't need structured sources, it is enough to list sources in _Notes_ of subsidy. Every row in this sheet is one source used to gain information about a subsidy.
+
+| Column | Example value | Required | Explanation |
+| ------ | ------------- | -------- | ----------- |
+| _Subsidy reference_ | | Yes | |
+| _Source summary_ | | No | |
+| _Information gained from source_ | | No | |
+| _Source last checked date_ | | No | |
+| _Source URL_ | | No | |
 
 ### Adjusting structure
 
