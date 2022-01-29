@@ -28,6 +28,11 @@ If you have any questions related to this project, please contact [it@investigac
     + [2.4. Set up wiki using docker](#24-set-up-wiki-using-docker)
   * [3. Push data from database to the wiki](#3-push-data-from-database-to-the-wiki)
   * [4. Learn to use other scripts](#4-learn-to-use-other-scripts)
+- [Database documentation](#database-documentation)
+  * [_0. Introduction_ sheet](#0-introduction-sheet)
+  * [_1. Legal entities_ sheet](#1-legal-entities-sheet)
+- [Wiki documentation](#wiki-documentation)
+- [Scripts documentation](#scripts-documentation)
 - [License](#license)
 
 ---
