@@ -240,17 +240,17 @@ This sheet is only informative and is not used by scripts or wiki at all. Feel f
 
 First of the 3 main sheets keeping information about legal entities like companies, trusts, etc. Every row in this sheet is one legal entity and its current details.
 
-| Column | Example value | Explanation |
-| ------ | ------------- | ----------- |
-| _Database identifier_ | AGROFERT, a.s. | Unique identification in this database. Should be name of the legal entity.<br><br>When other sheets are referencing legal entity, they are referencing what is written in this column.<br><br>If there are more legal entities with same name, then they should be differentiated by adding explanation to the parenthesis. Eg. if there are two Acme Ltd. companies and one is in United Kingdom and the other in New Zealand, then one would could have identifier "Acme Ltd. (UK)" and the other "Acme Ltd. (NZ)" |
-| _Legal entity type_ | Company | Type of legal entity. Whether it is company, trust, etc. Scripts and wiki do not rely on any specific values here, so feel free to differentiate legal entity types by any values you wish. |
-| _Name_ | | |
-| _Country_ | | |
-| _Identification number_ | | |
-| _Address_ | | |
-| _Foundation date_ | | |
-| _Dissolution date_ | | |
-| _Other notes_ | | |
+| Column | Example value | Required | Explanation |
+| ------ | ------------- | -------- | ----------- |
+| _Database identifier_ | AGROFERT, a.s. | Yes | Unique identification in this database. Should be name of the legal entity. When other sheets are referencing legal entity, they are referencing what is written in this column.<br><br>If there are more legal entities with same name, we recommend to differentiate them by adding explanation to the parenthesis. Eg. if there are two Acme Ltd. companies and one is in United Kingdom and the other in New Zealand, then one would could have identifier "Acme Ltd. (UK)" and the other "Acme Ltd. (NZ)" |
+| _Legal entity type_ | Company | Yes | Type of legal entity. Whether it is company, trust, etc. Scripts and wiki do not rely on any specific values here, so feel free to differentiate legal entity types by any values you wish. |
+| _Name_ | AGROFERT, a.s. | Yes | The actual current name of the legal entity. |
+| _Country_ | CZ | Yes | Country where the legal entity is currently founded. Must be two-letter country code defined by standard [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Eg. Germany is DE, France is FR, United States are US. |
+| _Identification number_ | 26185610 | No | Identification for the legal entity in its country. Can be only number, but also any text, eg. in Germany it can be "Stendal HRB 12345". |
+| _Address_ | Pyšelská 2327/2, Chodov, 149 00 Praha 4 | No | Current address of the legal entity. Ideally full, but can be also partial, eg. only city. |
+| _Foundation date_ | 2000-07-01 | No | The date when the legal entity was founded. When full date, it must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. But if you don't have the full date, it is ok to just have year here. |
+| _Dissolution date_ | N/A | No | If the legal entity was dissolved, this is the date when the dissolution happened. When full date, it must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. But if you don't have the full date, it is ok to just have year here. If the company was not dissolved, we recommend to fill N/A. |
+| _Other notes_ | Umbrella company for empire of Andrej Babiš | No | Add any other notes you want for the legal entity in this column. |
 
 ### _1.1. Legal entities owners_ sheet
 
