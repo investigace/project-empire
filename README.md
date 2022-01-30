@@ -130,7 +130,7 @@ When you have a server and, optionally, backup bucket set up, it is time for the
 First, you will need to clone this repository to the server. For example in the home folder of the logged-in user run following:
 
 ```
-$ git clone git@github.com:vlki/project-empire.git
+$ git clone git@github.com:investigace/project-empire.git
 ```
 
 That should create `project-empire` folder with `wiki` folder inside. Go to the wiki folder.
@@ -182,7 +182,7 @@ $ python3 --version
 Continue with cloning this repository to your machine and then open the `scripts` folder in the repository
 
 ```
-$ git clone git@github.com:vlki/project-empire.git
+$ git clone git@github.com:investigace/project-empire.git
 $ cd project-empire/scripts
 ```
 
@@ -449,7 +449,7 @@ TODO
 ---
 ## License
 
-Everything in this repository is licensed under [GNU General Public License v3.0](https://github.com/vlki/project-empire/blob/main/LICENSE).
+Everything in this repository is licensed under [GNU General Public License v3.0](https://github.com/investigace/project-empire/blob/main/LICENSE).
 
 [↑ Jump to Table of Contents](#table-of-contents)
 
