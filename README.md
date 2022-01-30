@@ -262,7 +262,7 @@ First of the 3 main sheets, keeping information about legal entities like compan
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
-| _Database identifier_ | AGROFERT, a.s. | Yes | Unique identification in this database. Should be name of the legal entity. When other sheets are referencing legal entity, they are referencing what is written in this column.<br><br>If there are more legal entities with same name, we recommend to differentiate them by adding explanation to the parenthesis. Eg. if there are two Acme Ltd. companies and one is in United Kingdom and the other in New Zealand, then one would could have identifier "Acme Ltd. (UK)" and the other "Acme Ltd. (NZ)" |
+| _Database identifier_ | AGROFERT, a.s. | Yes | Unique identification in this database. Should be name of the legal entity. When other sheets are referencing legal entity, they are referencing what is written in this column.<br><br>If there are more legal entities with same name, we recommend to differentiate them by adding explanation to the parenthesis. Eg. if there are two Acme Ltd. companies and one is in United Kingdom and the other in New Zealand, then one could have identifier "Acme Ltd. (UK)" and the other "Acme Ltd. (NZ)" |
 | _Legal entity type_ | Company | Yes | Type of legal entity. Whether it is company, trust, etc. Scripts and wiki do not rely on any specific values here, so feel free to differentiate legal entity types by any values you wish. |
 | _Name_ | AGROFERT, a.s. | Yes | The actual current name of the legal entity. |
 | _Country_ | CZ | Yes | Country where the legal entity is currently founded. Must be two-letter country code defined by standard [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Eg. Germany is DE, France is FR, United States are US, etc. |
@@ -319,11 +319,11 @@ Sheet with sources of information about legal entities. If you don't need struct
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
-| _Legal entity reference_ | AGROFERT, a.s. | Yes | |
-| _Source summary_ | Veřejný Rejstřík a Sbírka Listin - Ministerstvo Spravedlnosti České Republiky. Justice.cz. | No | |
-| _Information gained from source_ | Company identifier, names, addresses, foundation date | No | |
-| _Source last checked date_ | 2020-07-06 | No | |
-| _Source URL_ | https://or.justice.cz/ias/ui/rejstrik-firma.vysledky?subjektId=525681&typ=UPLNY | No | |
+| _Legal entity reference_ | AGROFERT, a.s. | Yes | Legal entity this source belongs to. Should have exactly the same value as _Database identifier_ of some row in sheet _1. Legal entities_. |
+| _Source summary_ | Veřejný Rejstřík a Sbírka Listin - Ministerstvo Spravedlnosti České Republiky. Justice.cz. | No | Summary or name of the source document. |
+| _Information gained from source_ | Company identifier, names, addresses, foundation date | No | What kind of information was obtained from the source. |
+| _Source last checked date_ | 2020-07-06 | No | The date when the source was last checked. Must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. |
+| _Source URL_ | https://or.justice.cz/ias/ui/rejstrik-firma.vysledky?subjektId=525681&typ=UPLNY | No | Full URL of the source document. |
 
 ### _1.4. Legal entities previous names_ sheet
 
@@ -331,10 +331,10 @@ Sheet for previous names of legal entities. You might not need previous names th
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
-| _Legal entity reference_ | SynBiol, a.s. | Yes | |
-| _Previous name_ | SYNTHESIA a.s. | Yes | |
-| _Named since date_ | 2004-11-08 | No | |
-| _Named until date_ | 2006-03-27 | No | |
+| _Legal entity reference_ | SynBiol, a.s. | Yes | Legal entity this previous name belongs to. Should have exactly the same value as _Database identifier_ of some row in sheet _1. Legal entities_. |
+| _Previous name_ | SYNTHESIA a.s. | Yes | Previous name of the legal entity. |
+| _Named since date_ | 2004-11-08 | No | The date the legal entity gained this name. When full date, it must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. But if you don't have the full date, it is ok to just have year here. |
+| _Named until date_ | 2006-03-27 | No | The date the legal entity lost this name. When full date, it must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. But if you don't have the full date, it is ok to just have year here. |
 
 ### _1.5. Legal entities previous addresses_ sheet
 
@@ -342,10 +342,10 @@ Sheet for previous addresses of legal entities. You might not need previous addr
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
-| _Legal entity reference_ | AGROFERT, a.s. | Yes | |
-| _Previous address_ | Pyšelská 1234, Chodov, 149 00 Praha 4 | Yes | |
-| _Address since date_ | 2004-11-08 | No | |
-| _Address until date_ | 2006-03-27 | No | |
+| _Legal entity reference_ | AGROFERT, a.s. | Yes | Legal entity this previous address belongs to. Should have exactly the same value as _Database identifier_ of some row in sheet _1. Legal entities_. |
+| _Previous address_ | Pyšelská 1234, Chodov, 149 00 Praha 4 | Yes | Previous address of the legal entity. |
+| _Address since date_ | 2004-11-08 | No | The date the legal entity gained this address. When full date, it must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. But if you don't have the full date, it is ok to just have year here. |
+| _Address until date_ | 2006-03-27 | No | The date the legal entity lost this address. When full date, it must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. But if you don't have the full date, it is ok to just have year here. |
 
 ### _1.6. Legal entities media mentions_ sheet
 
@@ -353,10 +353,10 @@ Sheet for information about mentions of legal entity in media. Every row in this
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
-| _Legal entity reference_ | AGROFERT, a.s. | Yes | |
-| _Summary of the media mention_ | Wikipedia page | No | |
-| _Media last checked date_ | 2022-01-01 | No | |
-| _Media mention url_ | https://cs.wikipedia.org/wiki/Agrofert | No | |
+| _Legal entity reference_ | AGROFERT, a.s. | Yes | Legal entity this media mention belongs to. Should have exactly the same value as _Database identifier_ of some row in sheet _1. Legal entities_. |
+| _Summary of the media mention_ | Wikipedia page | No | Summary or name of the mention in media. |
+| _Media last checked date_ | 2022-01-01 | No | The date when the mention was last checked. Must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. |
+| _Media mention url_ | https://cs.wikipedia.org/wiki/Agrofert | No | Full URL of the mention in media. |
 
 ### _2. People_ sheet
 
@@ -364,14 +364,14 @@ Second of the 3 main sheets, keeping information about people. Every row in this
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
-| _Database identifier_ | Andrej Babiš | Yes | |
-| _Full name_ | Andrej Babiš | Yes | |
-| _Nationality_ | CZ | No | |
-| _Date of birth_ | 2000-01-01 | No | |
-| _Residence country_ | CZ | No | |
-| _Residence full address_ | Pyšelská 2327/2, Chodov, 149 00 Praha 4 | No | |
-| _Residence only city_ | Praha 4 | No | |
-| _Other notes_ | Former prime minister of Czechia | No | |
+| _Database identifier_ | Andrej Babiš | Yes | Unique identification in this database. Should be name of the person. When other sheets are referencing person, they are referencing what is written in this column.<br><br>If there are more people with same name, we recommend to differentiate them by adding year of birth in the parenthesis. Eg. if there are two persons with name John Doe and one is born in 1950 and the other in 1980, then one would have identifier "John Doe (1950)" and the other "John Doe (1980)" |
+| _Full name_ | Andrej Babiš | Yes | Full name of the person. Last name should be at the end. |
+| _Nationality_ | CZ | No | Nationality of the person. Does not support multiple nationalities, so use _Other notes_ to track nationalities of multinationals. Must be two-letter country code defined by standard [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Eg. Germany is DE, France is FR, United States are US, etc. |
+| _Date of birth_ | 2000-01-01 | No | The date of birth. Must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. Full date of birth is not published in the wiki, only the year. |
+| _Residence country_ | CZ | No | Country of the person's residence. Must be two-letter country code defined by standard [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Eg. Germany is DE, France is FR, United States are US, etc. |
+| _Residence full address_ | Pyšelská 2327/2, Chodov, 149 00 Praha 4 | No | Current address of the person's residence. Ideally full, but can be also partial, eg. only city. Full address is not published in the wiki, only value in column _Residence only city_. |
+| _Residence only city_ | Praha 4 | No | City from the current address of the person's residence. |
+| _Other notes_ | Former prime minister of Czechia | No | Add any other notes you want for the person in this column. |
 
 ### _2.1. People sources_ sheet
 
@@ -379,11 +379,11 @@ Sheet with sources of information about people. If you don't need structured sou
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
-| _Person reference_ | Andrej Babiš | Yes | |
-| _Source summary_ | AGROFERT INC. :: Massachusetts (US) :: OpenCorporates. Opencorporates.Com. | No | |
-| _Information gained from source_ | Connection to AGROFERT INC. | No | |
-| _Source last checked date_ | 2020-07-06 | No | |
-| _Source URL_ | https://opencorporates.com/companies/us_ma/383446187 | No | |
+| _Person reference_ | Andrej Babiš | Yes | Person this source belongs to. Should have exactly the same value as _Database identifier_ of some row in sheet _2. People_. |
+| _Source summary_ | AGROFERT INC. :: Massachusetts (US) :: OpenCorporates. Opencorporates.Com. | No | Summary or name of the source document. |
+| _Information gained from source_ | Connection to AGROFERT INC. | No | What kind of information was obtained from the source. |
+| _Source last checked date_ | 2020-07-06 | No | The date when the source was last checked. Must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. |
+| _Source URL_ | https://opencorporates.com/companies/us_ma/383446187 | No | Full URL of the source document. |
 
 ### _3. Subsidies_ sheet
 
@@ -391,14 +391,14 @@ Third of the 3 main sheets, keeping information about subsidies. Every row in th
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
-| _Database identifier_ | | Yes | |
-| _Receiving legal entity reference_ | | Yes | |
-| _Year_ | | No | |
-| _Project name_ | | No | |
-| _Project code_ | | No | |
-| _Programme name_ | | No | |
-| _Programme code_ | | No | |
-| _Notes_ | | No | |
+| _Database identifier_ | CEDR-30/04UL-2003 | Yes | Unique identification in this database. Should be ideally project code. When other sheets are referencing subsidy, they are referencing what is written in this column.<br><br>If there are more subsidies with same project code, we recommend to differentiate them by adding something in the parenthesis. Eg. if there are two subsidies with code A-123 and one is from 2010 and the other from 2015, then one would have identifier "A-123 (2010)" and the other "A-123 (2015)" |
+| _Receiving legal entity reference_ | AGROFERT, a.s. | Yes | Legal entity which received this subsidy. Should have exactly the same value as _Database identifier_ of some row in sheet _1. Legal entities_. |
+| _Year_ | 2002 | No | Year in which the subsidy was received. Could be also range of years like "2007-2013". |
+| _Project name_ | Zlepšení hygieny provozu při skladování drůbeže  | No | Name of the subsidized project. |
+| _Project code_ | 30/04UL-2003 | No | Code of the subsidized project. |
+| _Programme name_ | SAPARD | No | Name of the programme the subsidy was received from. |
+| _Programme code_ | SAPARD | No | Code of the programme the subsidy was received from. |
+| _Notes_ | Signed in 2002, carried out in 2003. | No | Add any notes you want for the subsidy in this column. |
 
 ### _3.1. Subsidies payments_ sheet
 
@@ -406,13 +406,13 @@ Sheet for keeping information about subsidy payments. Every row in this sheet is
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
-| _Subsidy reference_ | | Yes | |
-| _Provider_ | | No | |
-| _Year_ | | No | |
-| _Original currency_ | | No | |
-| _Amount in original currency_ | | No | |
-| _Amount in EUR_ | | No | |
-| _Notes_ | | No | |
+| _Subsidy reference_ | CEDR-30/04UL-2003 | Yes | Subsidy this payment belongs to. Should have exactly the same value as _Database identifier_ of some row in sheet _3. Subsidies_. |
+| _Provider_ | Czech Ministry of agriculture | No | Institution which provided this payment. |
+| _Year_ | 2003 | No | Year the payment was made. |
+| _Original currency_ | CZK | No | The original currency of the payment. Must be three-letter code defined by standard [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217). Eg. Euro is EUR, US dollar is USD, Pound sterling is GBP, etc. |
+| _Amount in original currency_ | 556,875.00 | No | Amount of the payment in the original currency. Must be either in the English notation (12,345.67) or without any notation (12345). |
+| _Amount in EUR_ | 22,736.00 | No | Amount of the payment in Euro. Must be either in the English notation (12,345.67) or without any notation (12345). |
+| _Notes_ | Using approximate exchange rate 24,49 CZK/EUR. | No | Add any notes you want for the payment in this column. |
 
 ### _3.2. Subsidies sources_ sheet
 
@@ -420,11 +420,11 @@ Sheet with sources of information about subsidies. If you don't need structured 
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
-| _Subsidy reference_ | | Yes | |
-| _Source summary_ | | No | |
-| _Information gained from source_ | | No | |
-| _Source last checked date_ | | No | |
-| _Source URL_ | | No | |
+| _Subsidy reference_ | CEDR-30/04UL-2003 | Yes | Subsidy this source belongs to. Should have exactly the same value as _Database identifier_ of some row in sheet _3. Subsidies_. |
+| _Source summary_ | Subsidy record on Hlídač státu | No | Summary or name of the source document. |
+| _Information gained from source_ | Full subsidy record | No | What kind of information was obtained from the source. |
+| _Source last checked date_ | 2021-04-28 | No | The date when the source was last checked. Must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. |
+| _Source URL_ | https://www.hlidacstatu.cz/Dotace/Detail/cedr-a85110a7e99bbff7370eebb382f90913c193db91 | No | Full URL of the source document. |
 
 ### Adjusting structure
 
