@@ -265,7 +265,7 @@ First of the 3 main sheets, keeping information about legal entities like compan
 | _Database identifier_ | AGROFERT, a.s. | Yes | Unique identification in this database. Should be name of the legal entity. When other sheets are referencing legal entity, they are referencing what is written in this column.<br><br>If there are more legal entities with same name, we recommend to differentiate them by adding explanation to the parenthesis. Eg. if there are two Acme Ltd. companies and one is in United Kingdom and the other in New Zealand, then one would could have identifier "Acme Ltd. (UK)" and the other "Acme Ltd. (NZ)" |
 | _Legal entity type_ | Company | Yes | Type of legal entity. Whether it is company, trust, etc. Scripts and wiki do not rely on any specific values here, so feel free to differentiate legal entity types by any values you wish. |
 | _Name_ | AGROFERT, a.s. | Yes | The actual current name of the legal entity. |
-| _Country_ | CZ | Yes | Country where the legal entity is currently founded. Must be two-letter country code defined by standard [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Eg. Germany is DE, France is FR, United States are US. |
+| _Country_ | CZ | Yes | Country where the legal entity is currently founded. Must be two-letter country code defined by standard [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Eg. Germany is DE, France is FR, United States are US, etc. |
 | _Identification number_ | 26185610 | No | Identification for the legal entity in its country. Can be only number, but also any text, eg. in Germany it can be "Stendal HRB 12345". |
 | _Address_ | Pyšelská 2327/2, Chodov, 149 00 Praha 4 | No | Current address of the legal entity. Ideally full, but can be also partial, eg. only city. |
 | _Foundation date_ | 2000-07-01 | No | The date when the legal entity was founded. When full date, it must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. But if you don't have the full date, it is ok to just have year here. |
@@ -280,18 +280,18 @@ Note that there are 2 types of ownership records you can define using this sheet
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
-| _Owned legal entity reference_ | AGROFERT, a.s. | Yes | |
-| _Owner legal entity or person reference_ | Andrej Babiš | No | |
-| _Owner type_ | Person | Yes | |
-| _Owner name_ | Andrej Babiš | Yes | |
-| _Owner country_ | CZ | No | |
-| _Owner address_ | Pyšelská 2327/2, Chodov, 149 00 Praha 4 | No | |
-| _Owner legal entity identification number_ | 26185610 | No | |
-| _Owner person date of birth_ | 2000-01-01 | No | |
-| _Owned percentage_ | 100 | No | |
-| _Owned since date_ | 2005-05-30 | No | |
-| _Owned until date_ | 2017-02-02 | No | |
-| _Ownership details_ | In 2017 transferred ownership to trusts | No | |
+| _Owned legal entity reference_ | AGROFERT, a.s. | Yes | Legal entity which is being owned. Should have exactly the same value as _Database identifier_ of some row in sheet _1. Legal entities_. |
+| _Owner legal entity or person reference_ | Andrej Babiš | No | If the owner is in the database, fill here _Database identifier_ of either legal entity or person from the database. If the owner is not in the database for any reason, leave empty. |
+| _Owner type_ | Person | Yes | Add "Legal entity" when the owner is a legal entity, "Person" when it is a person. |
+| _Owner name_ | Andrej Babiš | Yes | Name of the owner, either legal entity name or person name. |
+| _Owner country_ | CZ | No | Country of the owner. Must be two-letter country code defined by standard [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Eg. Germany is DE, France is FR, United States are US, etc. |
+| _Owner address_ | Pyšelská 2327/2, Chodov, 149 00 Praha 4 | No | Current address of the owner. Ideally full, but can be also partial, eg. only city. |
+| _Owner legal entity identification number_ | 26185610 | No | If the owner is legal entity, this column is for identification number in its country. Can be only number, but also any text, eg. in Germany it can be "Stendal HRB 12345". |
+| _Owner person date of birth_ | 2000-01-01 | No | If the owner is person, this column is for date of birth of that person. Must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. |
+| _Owned percentage_ | 100 | No | How many percents does the owner owns. Add value from 0 to 100. But also textual values like "Majority" are allowed. |
+| _Owned since date_ | 2005-05-30 | No | The date when the ownership started. When full date, it must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. But if you don't have the full date, it is ok to just have year here. |
+| _Owned until date_ | 2017-02-02 | No | If the ownership ended, this is the date when that happened. When full date, it must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. But if you don't have the full date, it is ok to just have year here. If the ownership did not end, we recommend to fill N/A. |
+| _Ownership details_ | In 2017 transferred ownership to trusts | No | Add any other notes you want for the ownership in this column. |
 
 ### _1.2. Legal entities other relationships_ sheet
 
@@ -301,17 +301,17 @@ Note that there are 2 types of relationship records you can define using this sh
 
 | Column | Example value | Required | Explanation |
 | ------ | ------------- | -------- | ----------- |
-| _Legal entity reference_ | AGROFERT, a.s. | Yes | |
-| _Related legal entity or person reference_ | Andrej Babiš | No | |
-| _Related type_ | Person | Yes | |
-| _Related name_ | Andrej Babiš | Yes | |
-| _Related country_ | CZ | No | |
-| _Related address_ | Pyšelská 2327/2, Chodov, 149 00 Praha 4 | No | |
-| _Related legal entity identification number_ | 26185610 | No | |
-| _Related person date of birth_ | 2000-01-01 | No | |
-| _Related since date_ | 2005-05-30 | No | |
-| _Related until date_ | 2017-02-02 | No | |
-| _Relationship details_ | Chairman of the board | No | |
+| _Legal entity reference_ | AGROFERT, a.s. | Yes | Legal entity for which this relationship is defined. Should have exactly the same value as _Database identifier_ of some row in sheet _1. Legal entities_. |
+| _Related legal entity or person reference_ | Andrej Babiš | No | If the related legal entity or person is in the database, fill here _Database identifier_ of their row in the database. If the legal entity or person is not in the database for any reason, leave empty. |
+| _Related type_ | Person | Yes | Add "Legal entity" when the relationship is with a legal entity, "Person" when it is with a person. |
+| _Related name_ | Andrej Babiš | Yes | Name of the related legal entity or person. |
+| _Related country_ | CZ | No | Country of the related legal entity or person. Must be two-letter country code defined by standard [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Eg. Germany is DE, France is FR, United States are US, etc. |
+| _Related address_ | Pyšelská 2327/2, Chodov, 149 00 Praha 4 | No | Current address of the related legal entity or person. Ideally full, but can be also partial, eg. only city. |
+| _Related legal entity identification number_ | 26185610 | No | If the relationship is with legal entity, this column is for identification number in its country. Can be only number, but also any text, eg. in Germany it can be "Stendal HRB 12345". |
+| _Related person date of birth_ | 2000-01-01 | No | If the relationship is with person, this column is for date of birth of that person. Must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. |
+| _Related since date_ | 2005-05-30 | No | The date when the relationship started. When full date, it must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. But if you don't have the full date, it is ok to just have year here. |
+| _Related until date_ | 2017-02-02 | No | If the relationship ended, this is the date when that happened. When full date, it must be in [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) format, which is YYYY-MM-DD. But if you don't have the full date, it is ok to just have year here. If the relationship did not end, we recommend to fill N/A. |
+| _Relationship details_ | Chairman of the board | No | Add any other notes you want for the relationship in this column. |
 
 ### _1.3. Legal entities sources_ sheet
 
