@@ -252,6 +252,9 @@ Note that you have to run the script anytime you want to publish updated data fr
 
 We have built the Project Empire database structure to best accommodate all the different data we encountered when mapping business empires and we will explain the structure in the following sections. Scripts and wiki depend on this structure — sheets and columns having correct names and data being in specific format —, but we understand that the needs of your projects can vary and there are safe ways to adjust the structure without breaking any of the scripts and wiki features. Adjusting is explained right after all the database spreadsheet sheets.
 
+* Demo database spreadsheet: https://docs.google.com/spreadsheets/d/1EJ-bP-qqTjZx2jcY6hfG3uAKvn6_FtCA-vqD4qVzn-k/edit
+* Empty database spreadsheet: https://docs.google.com/spreadsheets/d/19syMW_V3G6AmG0yIHBZzys2RfBH4zsAbObO5FrhjB68/edit
+
 ### _0. Introduction_ sheet
 
 This sheet is only informative and is not used by scripts or wiki at all. Feel free to remove or completely change as you desire.
