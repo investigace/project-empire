@@ -46,6 +46,9 @@ If you have any questions related to this project, please contact [it@investigac
 - [Wiki documentation](#wiki-documentation)
   * [Restore wiki from S3 backup](#restore-wiki-from-s3-backup)
 - [Scripts documentation](#scripts-documentation)
+  * [`push_empire_database_to_wiki.py`](#push_empire_database_to_wikipy)
+  * [`fetch_relationships_of_cz_companies_from_ares.py`](#fetch_relationships_of_cz_companies_from_arespy)
+  * [`fetch_subsidies_of_cz_companies_from_hlidacstatu.py`](#fetch_subsidies_of_cz_companies_from_hlidacstatupy)
 - [License](#license)
 
 ---
