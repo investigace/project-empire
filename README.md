@@ -531,7 +531,7 @@ $ ./fetch_relationships_of_cz_companies_from_ares.py ~/Downloads/Project\ Empire
 
 ### `fetch_subsidies_of_cz_companies_from_hlidacstatu.py`
 
-For fetching subsidies of Czech companies from platform hlidacstatu.cz. Fetches all the subsidies and removes duplicate records as identified by hlidacstatu.cz. When run, it prompts for API key to hlidacstatu.cz, which you can obtain by creating an account there and then navigating to their API page.
+For fetching subsidies of Czech companies from platform hlidacstatu.cz. Fetches all the subsidies and removes duplicate records as identified by hlidacstatu.cz. When run, it prompts for API key to hlidacstatu.cz, which you can obtain by creating an account there and then navigating to their API page. Saves the result in `subsidies_of_cz_companies_from_hlidacstatu.xlsx` Excel file in same structure as is used in database spreadsheet for easy copying.
 
 Has 1 argument: path to the database spreadsheet downloaded as Excel. Does not offer any additional options.
 
