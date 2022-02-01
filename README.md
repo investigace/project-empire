@@ -8,8 +8,8 @@ Currently running Project Empire wikis:
 
 | Person of interest | Project Empire wiki              |
 | ------------------ | -------------------------------- |
-| Andrej Babiš       | https://noveimperiumab.vlki.cz/ (UPDATE WITH FINAL DOMAIN) |
-| Daniel Křetínský   |  https://empirekretinsky.vlki.cz/ (UPDATE WITH FINAL DOMAIN)  |
+| Andrej Babiš       | https://imperiumab.investigace.cz/ |
+| Daniel Křetínský   |  https://imperiumdk.investigace.cz/  |
 
 If you have any questions related to this project, please contact [it@investigace.cz](mailto:it@investigace.cz).
 
@@ -55,7 +55,7 @@ There are 3 main parts to a working Project Empire. **Database**, which is a Goo
 Let's show all the parts using demo data. We have put together tiny sample from our first database done for Andrej Babiš. Here are links for both the database and wiki:
 
 * Demo database: https://docs.google.com/spreadsheets/d/1EJ-bP-qqTjZx2jcY6hfG3uAKvn6_FtCA-vqD4qVzn-k/edit
-* Demo wiki: https://project-empire-wiki-demo.vlki.cz/
+* Demo wiki: https://project-empire-demo.investigace.cz/
 
 ### Database
 
@@ -71,7 +71,7 @@ Normally the database would not be publicly available, but only shared to people
 
 Project Empire wiki is a custom-configured [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) which is prepared to be run via [Docker](https://www.docker.com/) anywhere you want — in the cloud or on your server. After installing, you can customize it yourself to present your data exactly how you want.
 
-You can see that the [demo wiki](https://project-empire-wiki-demo.vlki.cz/) right now contains the same number of legal entities, people and subsidies as the database. And if you open for example the company [AGROFERT, a.s.](https://project-empire-wiki-demo.vlki.cz/index.php/AGROFERT,_a.s.), you can see, apart from the basic information, all the owner and other relationships the company has and media mentions from the database together at that one page. Plus offers links to the related pages. There lies the value of the wiki — it displays the data clearly and in easily browsable fashion.
+You can see that the [demo wiki](https://project-empire-demo.investigace.cz/) right now contains the same number of legal entities, people and subsidies as the database. And if you open for example the company [AGROFERT, a.s.](https://project-empire-demo.investigace.cz/index.php/AGROFERT,_a.s.), you can see, apart from the basic information, all the owner and other relationships the company has and media mentions from the database together at that one page. Plus offers links to the related pages. There lies the value of the wiki — it displays the data clearly and in easily browsable fashion.
 
 But how you get the data from the database to the wiki? The data don't have to be manually updated, we have a script, which is takes the database spreadsheet and pushes its data to the wiki.
 
@@ -206,14 +206,14 @@ The script for pushing data from the database currently cannot read data directl
 Let's finally push the data. The script `push_empire_database_to_wiki.py` takes 3 arguments, path to the database Excel file, domain of the wiki and wiki user to use. Here is an example how we run it for the demo:
 
 ```
-$ ./push_empire_database_to_wiki.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andrej\ Babiš\).xls project-empire-wiki-demo.vlki.cz admin
+$ ./push_empire_database_to_wiki.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andrej\ Babiš\).xls project-empire-demo.investigace.cz admin
 ```
 
 After that the script asks for password of the wiki user. When correct, the script will compute all the needed changes to the wiki pages and asks whether to do the actual changes. Here is an example of output when the script was first run for the demo:
 
 ```
-$ ./push_empire_database_to_wiki.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andrej\ Babiš\).xlsx project-empire-wiki-demo.vlki.cz admin
-Password for user admin at Empire wiki https://project-empire-wiki-demo.vlki.cz/: ********************
+$ ./push_empire_database_to_wiki.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andrej\ Babiš\).xlsx project-empire-demo.investigace.cz admin
+Password for user admin at Empire wiki https://project-empire-demo.investigace.cz/: ********************
 Loaded Empire database: 6 legal entities, 2 people, 0 subsidies
 Connected to Empire wiki
 Preparing changes to be pushed...
