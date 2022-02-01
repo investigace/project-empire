@@ -42,7 +42,9 @@ If you have any questions related to this project, please contact [it@investigac
   * [_3. Subsidies_ sheet](#3-subsidies-sheet)
   * [_3.1. Subsidies payments_ sheet](#31-subsidies-payments-sheet)
   * [_3.2. Subsidies sources_ sheet](#32-subsidies-sources-sheet)
+  * [Adjusting structure](#adjusting-structure)
 - [Wiki documentation](#wiki-documentation)
+  * [Restore wiki from S3 backup](#restore-wiki-from-s3-backup)
 - [Scripts documentation](#scripts-documentation)
 - [License](#license)
 
@@ -431,7 +433,13 @@ Sheet with sources of information about subsidies. If you don't need structured 
 
 ### Adjusting structure
 
-TODO
+Scripts rely on the structure to be able to load the data from the database spreadsheet, but there are safe ways to adjust the structure. Scripts only need:
+
+1. sheets to have the exact names,
+2. columns to have the exact headers,
+3. headers to be on row 4 and data starting on the row 5.
+
+Which means that you can do anything, which does not mess up these needs. You can add new sheets or add new columns as you please. You can reorder the columns in any of the sheets. Or you can for example safely use colors or different fonts.
 
 [↑ Jump to Table of Contents](#table-of-contents)
 
@@ -441,11 +449,94 @@ TODO
 
 ### Restore wiki from S3 backup
 
+If you want to restore wiki from S3 backup, there is _s3-backup_ Docker service prepared for that. On the server, where you want to restore wiki from backup, prepare everything as you would when installing new wiki. That is: follow the steps from [2. Install wiki](#2-install-wiki) all the way up to command `docker-compose up` — you don't want to run this command as that would install fresh new wiki.
+
+Instead of running `docker-compose up`, first start only database by running:
+
+```
+docker-compose up -d db
+```
+
+When the database is built and running, fire up _s3-restore_ service, which will connect to the S3 bucket with backups, download the most recent backup and restore the wiki from it. Restoring in this situation is populating the database from database dump and restoring contents of `mediawiki/shared` folder. Note that to make it work, you need to provide in `.env` the credentials for accessing the correct S3 bucket.
+
+Restore command:
+
+```
+docker-compose run --rm s3-restore
+```
+
+After the restore is done, just continue with the installation process by running `docker-compose up`. That's it!
+
 [↑ Jump to Table of Contents](#table-of-contents)
 
 ---
 
 ## Scripts documentation
+
+All the scripts are written in Python v3 and should be therefore runnable on any system where Python v3 can be installed. Library dependencides are defined in `requirements.txt` file and we recommend installing them only in the virtual environment (venv) so the dependencies do not affect any other scripts you might have on your system. Before running any of the following scripts we therefore recommend running following to enter virtual environment and install the dependencies:
+
+```
+$ python3 -m venv .venv
+$ . .venv/bin/activate
+$ pip3 install -r requirements.txt
+```
+
+The scripts follow convention that if you run them without any arguments or with `-h`/`--help` option, help is printed with all the arguments and options of that script. Eg.:
+
+```
+$ ./push_empire_database_to_wiki.py
+usage: push_empire_database_to_wiki.py [-h] DATABASE_EXCEL WIKI WIKI_USER
+
+Push Empire database data to Empire wiki
+
+positional arguments:
+  DATABASE_EXCEL  Path to the Excel spreadsheet file with Empire database
+  WIKI            Domain or full URL of Empire wiki, e.g. https://empirewiki.example.org/
+  WIKI_USER       Username to use for login to Empire wiki
+
+optional arguments:
+  -h, --help      show this help message and exit
+```
+
+### `push_empire_database_to_wiki.py`
+
+For pushing data from database spreadsheet to the wiki. Has 3 arguments: path to the database spreadsheet downloaded as Excel, wiki domain and wiki user name. When run, it prompts for password of wiki user.
+
+Example run:
+
+```
+$ ./push_empire_database_to_wiki.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andrej\ Babiš\).xls project-empire-demo.investigace.cz admin
+```
+
+### `fetch_relationships_of_cz_companies_from_ares.py`
+
+For fetching relationships of Czech companies from ARES database, which is managed by Czech Ministry of Finance. Fetches full history of ownerships and only current other relationships (like people on the board, etc.). Saves the result in `relationships_of_cz_companies_from_ares.xlsx` Excel file in same structure as is used in database spreadsheet for easy copying.
+
+Has 1 argument: path to the database spreadsheet downloaded as Excel. And offers 2 options: one to cache XML files from ARES in case you are running the scripts multiple times and don't want to download fresh XMLs every time. And the other option to automatically confirm continuing after the database is loaded by script.
+
+Example run:
+
+```
+$ ./fetch_relationships_of_cz_companies_from_ares.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andrej\ Babiš\).xls
+```
+
+With the options:
+
+```
+$ ./fetch_relationships_of_cz_companies_from_ares.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andrej\ Babiš\).xls --cache-ares-xmls --yes
+```
+
+### `fetch_subsidies_of_cz_companies_from_hlidacstatu.py`
+
+For fetching subsidies of Czech companies from platform hlidacstatu.cz. Fetches all the subsidies and removes duplicate records as identified by hlidacstatu.cz. When run, it prompts for API key to hlidacstatu.cz, which you can obtain by creating an account there and then navigating to their API page.
+
+Has 1 argument: path to the database spreadsheet downloaded as Excel. Does not offer any additional options.
+
+Example run:
+
+```
+$ ./fetch_subsidies_of_cz_companies_from_hlidacstatu.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andrej\ Babiš\).xls
+```
 
 [↑ Jump to Table of Contents](#table-of-contents)
 
