@@ -28,6 +28,7 @@ services:
     image: mariadb:10
     volumes:
       - ./mariadb/data:/var/lib/mysql:rw
+      - ./mariadb/80-custom.cnf:/etc/mysql/mariadb.conf.d/80-custom.cnf:ro
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-mediawiki}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-mediawiki}
