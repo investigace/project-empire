@@ -47,6 +47,12 @@ if [ ! -f "/opt/mediawiki_shared/LocalSettings.php" ]; then
   # Enable Cite extension
   echo "wfLoadExtension( 'Cite' );" >> /opt/mediawiki_shared/LocalSettings.php
 
+  # Prevent anonymous editing and sign ups
+  echo "# Disable anonymous editing" >> /opt/mediawiki_shared/LocalSettings.php
+  echo "\$wgGroupPermissions['*']['edit'] = false;" >> /opt/mediawiki_shared/LocalSettings.php
+  echo "# Prevent new user registrations except by sysops" >> /opt/mediawiki_shared/LocalSettings.php
+  echo "\$wgGroupPermissions['*']['createaccount'] = false;" >> /opt/mediawiki_shared/LocalSettings.php
+
   # Install pages
   for page_path in "$install_pages_dir"/*
   do
