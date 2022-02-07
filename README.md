@@ -27,7 +27,6 @@ If you have any questions related to this project, please contact [it@investigac
     + [2.3. (optional) Set up Amazon S3 bucket for backups](#23-optional-set-up-amazon-s3-bucket-for-backups)
     + [2.4. Set up wiki using docker](#24-set-up-wiki-using-docker)
   * [3. Push data from database to the wiki](#3-push-data-from-database-to-the-wiki)
-  * [4. Learn to use other scripts](#4-learn-to-use-other-scripts)
 - [Database documentation](#database-documentation)
   * [_0. Introduction_ sheet](#0-introduction-sheet)
   * [_1. Legal entities_ sheet](#1-legal-entities-sheet)
@@ -516,7 +515,7 @@ $ ./push_empire_database_to_wiki.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andr
 
 For fetching relationships of Czech companies from ARES database, which is managed by Czech Ministry of Finance. Fetches full history of ownerships and only current other relationships (like people on the board, etc.). Saves the result in `relationships_of_cz_companies_from_ares.xlsx` Excel file in same structure as is used in database spreadsheet for easy copying.
 
-Has 1 argument: path to the database spreadsheet downloaded as Excel. And offers 2 options: one to cache XML files from ARES in case you are running the scripts multiple times and don't want to download fresh XMLs every time. And the other option to automatically confirm continuing after the database is loaded by script.
+Has 1 argument: path to the database spreadsheet downloaded as Excel. And offers 3 options: one to cache XML files from ARES in case you are running the scripts multiple times and don't want to download fresh XMLs every time. Second option to automatically confirm continuing after the database is loaded by script. And the last option is to only fetch for companies which does not have any relationships so far in the database.
 
 Example run:
 
@@ -527,7 +526,7 @@ $ ./fetch_relationships_of_cz_companies_from_ares.py ~/Downloads/Project\ Empire
 With the options:
 
 ```
-$ ./fetch_relationships_of_cz_companies_from_ares.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andrej\ Babiš\).xls --cache-ares-xmls --yes
+$ ./fetch_relationships_of_cz_companies_from_ares.py ~/Downloads/Project\ Empire\ -\ Demo\ \(Andrej\ Babiš\).xls --cache-ares-xmls --yes --only-companies-without-relationships
 ```
 
 ### `fetch_subsidies_of_cz_companies_from_hlidacstatu.py`

@@ -6,6 +6,7 @@ from os import getenv
 from os.path import join, dirname, abspath
 from pprint import pprint
 import sys
+from tkinter import E
 
 import openpyxl
 from prompt_toolkit.shortcuts import confirm, prompt
@@ -18,6 +19,12 @@ if __name__ == "__main__":
         'database_excel',
         metavar="DATABASE_EXCEL",
         help='Path to the Excel spreadsheet file with Empire database'
+    )
+    parser.add_argument(
+        '-o',
+        '--only-companies-without-relationships',
+        help='Fetch for only CZ companies which do not have currently any owner or other relationships',
+        action='store_true'
     )
     parser.add_argument(
         '-c',
@@ -46,11 +53,25 @@ if __name__ == "__main__":
 
     print(f"Loaded Empire database: {len(empire_data['legal_entities'])} legal entities, {len(empire_data['people'])} people, {len(empire_data['subsidies'])} subsidies")
 
-    # Filter out CZ legal entites with identifier
+    # Filter out CZ legal entites with identifier and optionally by relationships
 
     cz_legal_entites = list(filter(lambda c: c.country == 'CZ' and c.identification_number is not None, empire_data['legal_entities']))
 
-    print(f"Will fetch relationships for {len(cz_legal_entites)} legal entities from CZ country which have identification number filled")
+    if args.only_companies_without_relationships:
+        cz_legal_entites_without_relationships = []
+        
+        for legal_entity in cz_legal_entites:
+            owners = list(filter(lambda o: o.owned_legal_entity == legal_entity, empire_data['owners']))
+            other_relationships = list(filter(lambda o: o.legal_entity == legal_entity, empire_data['other_relationships']))
+
+            if len(owners) == 0 and len(other_relationships) == 0:
+                cz_legal_entites_without_relationships.append(legal_entity)
+
+        cz_legal_entites = cz_legal_entites_without_relationships
+
+        print(f"Will fetch relationships for {len(cz_legal_entites)} legal entities from CZ country which have identification number filled and which does not have any relationships now")
+    else:
+        print(f"Will fetch relationships for {len(cz_legal_entites)} legal entities from CZ country which have identification number filled")
 
     # Check if continue
 
@@ -162,4 +183,4 @@ if __name__ == "__main__":
 
     wb.save(out_excel_path)
 
-    print(f'Subsidies fetched and saved to Excel file {out_excel_path}')
+    print(f'Relationships fetched and saved to Excel file {out_excel_path}')

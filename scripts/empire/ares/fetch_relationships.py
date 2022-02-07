@@ -92,7 +92,10 @@ def fetch_relationships(legal_entities, cache_ares_xmls=False):
 
 
 def parse_owners(ares_xml_dict, legal_entity):
-    company_data = ares_xml_dict['are:Ares_odpovedi']['are:Odpoved']['are:Vypis_VR']    
+    company_data = ares_xml_dict['are:Ares_odpovedi']['are:Odpoved']['are:Vypis_VR']
+
+    if isinstance(company_data, list):
+        company_data = company_data[0]
 
     owners = []
 
@@ -212,7 +215,10 @@ def parse_owners(ares_xml_dict, legal_entity):
 
 
 def parse_other_relationships(ares_xml_dict, legal_entity):
-    company_data = ares_xml_dict['are:Ares_odpovedi']['are:Odpoved']['are:Vypis_VR']    
+    company_data = ares_xml_dict['are:Ares_odpovedi']['are:Odpoved']['are:Vypis_VR']
+
+    if isinstance(company_data, list):
+        company_data = company_data[0]
 
     other_relationships = []
 
@@ -411,9 +417,9 @@ def parse_address(address_data):
     if city_part:
         address_parts.append(city_part.strip())
 
-    city = address_data.get('dtt:NazevObce')
-    zip = address_data.get('dtt:Psc')
-    if city or zip:
+    city = address_data.get('dtt:NazevObce', '')
+    zip = address_data.get('dtt:Psc', '')
+    if city != '' or zip != '':
         address_parts.append(f'{zip} {city}'.strip())
 
     region = address_data.get('dtt:NazevOkresu')
@@ -438,11 +444,11 @@ def parse_country(address_data):
     return iso3166_country.alpha2
 
 def parse_currency(value):
-    return float(value.replace(';', '.'))
+    return float(value.replace(';', '.').replace(',', '.'))
 
 def format_currency(value):
     return locale.format_string('%.0f', value, True) + ' Kč'
 
 def parse_percents(value):
-    return float(value.replace(';', '.'))
+    return float(value.replace(';', '.').replace(',', '.'))
 
