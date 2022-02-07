@@ -2,7 +2,11 @@
 
 Project Empire is a set of tools designed to help with keeping information about assets and companies of inluential people or groups. It was originally created for business structures of former prime minister and owner of vast business empire Andrej Babiš, but is now generalized and can be used for anybody else.
 
-Project was created by [České centrum pro investigativní žurnalistiku, o.p.s.](https://www.investigace.cz/) and between September 2021 and January 2022 was funded by [Stars4Media innovation programme](https://stars4media.eu/).
+Project was created by [České centrum pro investigativní žurnalistiku, o.p.s.](https://www.investigace.cz/) and co-funded by the European Commission in the framework of the [Stars4Media](https://stars4media.eu/) pilot programme.
+
+![](/docs/logos/stars4media.png?raw=true|width=200px)
+
+![](/docs/logos/co-funded-european-union.jpg?raw=true)
 
 Currently running Project Empire wikis:
 
