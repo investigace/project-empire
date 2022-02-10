@@ -13,6 +13,7 @@ RUN chmod +x /root/wait-for
 
 # Add extensions
 COPY extensions/EmbedVideo-e1e965 /var/www/html/extensions/EmbedVideo
+COPY extensions/HeadScript-7eafaa4 /var/www/html/extensions/HeadScript
 COPY extensions/Iframe-v0.09 /var/www/html/extensions/Iframe
 
 # Create directory shared with host system

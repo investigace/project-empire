@@ -47,6 +47,12 @@ if [ ! -f "/opt/mediawiki_shared/LocalSettings.php" ]; then
   # Enable Cite extension
   echo "wfLoadExtension( 'Cite' );" >> /opt/mediawiki_shared/LocalSettings.php
 
+  # Enable HeadScript extension
+  echo "wfLoadExtension( 'HeadScript' );" >> /opt/mediawiki_shared/LocalSettings.php
+  echo "\$wgHeadScriptCode = <<< 'START_END_MARKER'" >> /opt/mediawiki_shared/LocalSettings.php;
+  echo "<!-- Add custom scripts here -->" >> /opt/mediawiki_shared/LocalSettings.php;
+  echo "START_END_MARKER;" >> /opt/mediawiki_shared/LocalSettings.php;
+
   # Prevent anonymous editing and sign ups
   echo "# Disable anonymous editing" >> /opt/mediawiki_shared/LocalSettings.php
   echo "\$wgGroupPermissions['*']['edit'] = false;" >> /opt/mediawiki_shared/LocalSettings.php
