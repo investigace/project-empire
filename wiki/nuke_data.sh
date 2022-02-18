@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -e
 CURRENT_DIR=$(dirname "$1")
 
 MEDIAWIKI_LOCAL_SETTINGS_PHP=$(realpath $CURRENT_DIR/mediawiki/shared/LocalSettings.php)
