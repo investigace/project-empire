@@ -29,4 +29,12 @@ else
   rm -f /etc/nginx/conf.d/redirect.conf
 fi
 
+# Reloading configuration periodically so we are loading the newly
+# obtained certificates by certbot
+while :
+do
+    sleep 6h
+    nginx -s reload
+done &
+
 nginx -g 'daemon off;'
