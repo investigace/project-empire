@@ -1,4 +1,4 @@
-FROM mediawiki:1.37
+FROM mediawiki:1.43
 
 # Netcat is needed for wait-for to run
 RUN apt-get -q update && apt-get -qy install netcat
