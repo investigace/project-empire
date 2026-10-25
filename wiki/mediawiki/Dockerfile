@@ -1,7 +1,7 @@
 FROM mediawiki:1.43
 
 # Netcat is needed for wait-for to run
-RUN apt-get -q update && apt-get -qy install netcat
+RUN apt-get -q update && apt-get -qy install netcat-openbsd
 
 # Add start script
 COPY start.sh /root/start.sh
