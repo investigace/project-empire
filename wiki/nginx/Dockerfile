@@ -1,4 +1,4 @@
-FROM nginx:1.21
+FROM nginx:1.31
 
 COPY start.sh /app/start.sh
 
